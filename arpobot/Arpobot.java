@@ -128,7 +128,7 @@ public class Arpobot
 		String kanal;
 		int i;
 		String sendernick;
-		String version = "arpobot svn $Revision$ $Date$";
+		String version = "svn $Revision$ $Date$";
 
 		nick = "ArvoXbot";
 		altnick = "ArvoXbotAlpha";
