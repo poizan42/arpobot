@@ -3,7 +3,7 @@ package arpobot;
 import java.io.*;
 import java.net.*;
 
-class irc
+class Irc
 {
 	private String commando;
 	private String server;
@@ -89,7 +89,7 @@ class irc
 		this.skriv.write(commando);
 		this.skriv.flush();
 		
-		System.out.print("<-- "+commando);
+		System.out.print("<-- ("+logLevel.toString()+") "+commando);
 	}
 	public void connect() throws Exception
 	{
@@ -116,31 +116,31 @@ class irc
 
 public class Arpobot
 {
+	final static String server = "dk.quakenet.org";
+	final static int port = 6667;
+
+	final static String nick1 = "ArvoXbot";
+	final static String nick2 = "ArvoXbotAlpha";
+	final static String kanal = "#ArvoX";
+	
+	final static String version = "svn $Revision$ $Date$";
+	String nick;
+	
 	public static void main(String[] args) throws Exception
 	{
-		irc bot =  new irc();
-		String nick,altnick;
-		String server,servername = null;
-		int port;
+		Irc bot =  new Irc();
+		String nick = null;
+		String servername = null;
 		int code;
 		String linje;
 		String skrivning;
-		String kanal;
 		int i;
 		String sendernick;
-		String version = "svn $Revision$ $Date$";
-
-		nick = "ArvoXbot";
-		altnick = "ArvoXbotAlpha";
-		kanal = "#ArvoX";
-
-		server = "dk.quakenet.org";
-		port = 6667;
 
 		bot.setServer(server , port);
 		bot.connect();
 
-		System.out.println(nick +"@"+server+":"+port);
+		System.out.println(nick1 +"@"+server+":"+port);
 
 
 		while ((linje = bot.getLine()) != null)
@@ -169,14 +169,16 @@ public class Arpobot
 			if (linje.indexOf("AUTH :*** Checking Ident") >= 0)
 			{
 	// Saetter nick and username
-				bot.nick(nick);
-				bot.user(nick,nick);
+				bot.nick(nick1);
+				bot.user(nick1,nick1);
+				nick = nick1;
 			}
 	// nick er i brug proever et andet
-			if (linje.indexOf("433 * "+nick) >= 0)
+			if (linje.indexOf("433 * "+nick1) >= 0)
 			{
-				bot.nick(altnick);
-				bot.user(nick,nick);
+				bot.nick(nick2);
+				bot.user(nick1,nick1);
+				nick = nick2;
 			}
 	//ponger paa ping
 			if (linje.toUpperCase().startsWith("PING "))
@@ -190,7 +192,7 @@ public class Arpobot
 				bot.msg("Q@CServe.quakenet.org", "AUTH ArvoXbot QtD6JXt8");
 			}
 	//svare paa beskeder
-			if ((linje.indexOf("PRIVMSG "+nick+" :") >= 0) || (linje.indexOf("PRIVMSG "+altnick+" :") >= 0))
+			if (linje.indexOf("PRIVMSG "+nick+" :") >= 0)
 			{
 				i = linje.indexOf("!");
 				sendernick = linje.substring(1,i);
