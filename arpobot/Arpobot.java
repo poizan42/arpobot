@@ -11,7 +11,7 @@ class Irc
 	private Socket socket;
 	private BufferedWriter skriv;
 	private BufferedReader laes;
-	
+
 	public enum LogLevel {DEBUG, USERINF, CTCP, CHAN, PRIV};
 
 	public void pass (String pass) throws Exception
@@ -53,28 +53,28 @@ class Irc
 	{
 		msg(receiver, text, LogLevel.PRIV);
 	}
-	
+
 	public void ctcpRequest (String receiver, String text) throws Exception
 	{
 		msg(receiver, '\u0001'+text+'\u0001', LogLevel.CTCP);
 	}
-	
+
 	private void msg (String receiver, String text, LogLevel logLevel) throws Exception
 	{
 		commando = "PRIVMSG " + receiver + " :" + text + "\r\n";
 		execute(commando, logLevel);
 	}
-	
+
 	public void notice (String receiver, String text) throws Exception
 	{
 		notice(receiver, text, LogLevel.PRIV);
 	}
-	
+
 	public void ctcpReply (String receiver, String text) throws Exception
 	{
 		notice(receiver, '\u0001'+text+'\u0001', LogLevel.CTCP);
-	}	
-	
+	}
+
 	private void notice (String receiver, String text, LogLevel logLevel) throws Exception
 	{
 		commando = "NOTICE " + receiver + " :" + text + "\r\n";
@@ -88,7 +88,7 @@ class Irc
 	{
 		this.skriv.write(commando);
 		this.skriv.flush();
-		
+
 		System.out.print("<-- ("+logLevel.toString()+") "+commando);
 	}
 	public void connect() throws Exception
@@ -122,10 +122,10 @@ public class Arpobot
 	final static String nick1 = "ArvoXbot";
 	final static String nick2 = "ArvoXbotAlpha";
 	final static String kanal = "#ArvoX";
-	
+
 	final static String version = "svn $Revision$ $Date$";
 	String nick;
-	
+
 	public static void main(String[] args) throws Exception
 	{
 		Irc bot =  new Irc();
@@ -199,11 +199,7 @@ public class Arpobot
 			//version
 				if (linje.toLowerCase().indexOf("version") >= 0)
 				{
-					bot.notice(sendernick,"Jeg er i "+ version +" version");
-					//skrivning = "NOTICE "+sendernick+" :Jeg er i "+ version +" version\r\n";
-					//skriv.write(skrivning);
-					//System.out.print("<-- "+skrivning);
-					//skriv.flush();
+					bot.notice(sendernick,"Jeg er i "+ version);
 				}
 			}
 		}
