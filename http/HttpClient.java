@@ -3,7 +3,7 @@ package http;
 import java.io.*;
 import java.net.*;
 
-public class httpClient
+public class HttpClient
 {
 	private String host;
 	private int port;
@@ -65,38 +65,45 @@ public class httpClient
 
 	}
 
-	public void getWord() throws Exception
+	public String getWord() throws Exception
 	{
 		setHost("word.arvox.dk",80);
 		httpGET("/?word&return");
 
-		String s = ind.readLine();
-		while (s != null)
-		{
-			if (s.startsWith(":"))
-				System.out.println(s.substring(1));
-			s = ind.readLine();
-		}
-		forbindelse.close();
-	}
-
-	public void google(String search) throws Exception
-	{
-		setHost("www.google.com",80);
-		httpGET("/search?q=" + search + "&btnI=true");
-
-		String s;
+		String s,ret = "false";
 		do
 		{
 			s = ind.readLine();
-			if (s.startsWith("Location:"))
+			if (s.startsWith(":"))
 			{
-				System.out.println(s.substring(10));
-				forbindelse.close();
+				ret = s.substring(1);
 				break;
 				// dette er gjordt for at forhindre scriptet i at haenge!!!
 			}
 		}
 		while (s != null);
+		forbindelse.close();
+		return ret;
+	}
+
+	public String google(String search) throws Exception
+	{
+		setHost("www.google.com",80);
+		httpGET("/search?q=" + search + "&btnI=true");
+
+		String s,ret = "false";
+		do
+		{
+			s = ind.readLine();
+			if (s.startsWith("Location:"))
+			{
+				ret = s.substring(10);
+				break;
+				// dette er gjordt for at forhindre scriptet i at haenge!!!
+			}
+		}
+		while (s != null);
+		forbindelse.close();
+		return ret;
 	}
 }

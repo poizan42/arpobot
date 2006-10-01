@@ -1,4 +1,5 @@
 import irc.IrcClient;
+import http.HttpClient;
 public class Arpobot
 {
 	final static String server = "dk.quakenet.org";
@@ -23,6 +24,7 @@ public class Arpobot
 		int i;
 		String sendernick;
 
+		HttpClient http = new HttpClient();
 		IrcClient bot =  new IrcClient(server , port);
 		//bot.setServer(server , port);
 		bot.connect();
@@ -98,6 +100,29 @@ public class Arpobot
 					bot.topic(kanal, topic);
 				}
 			}
+			if (linje.indexOf("!word") >= 0)
+			{
+				String sender;
+				i = linje.indexOf("!");
+				if (i >= 0)
+				{
+					sender = linje.substring(1,i);
+					bot.notice(sender,http.getWord());
+				}
+			}
+			if (linje.indexOf("!google") >= 0)
+			{
+				String sender,search;
+				i = linje.indexOf("!google");
+				search = linje.substring(i+8);
+				i = linje.indexOf("!");
+				if (i >= 0)
+				{
+					sender = linje.substring(1,i);
+					bot.notice(sender,http.google(search));
+				}
+			}
+
 		}
 	}
 }
