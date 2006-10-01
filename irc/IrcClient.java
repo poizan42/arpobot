@@ -37,15 +37,13 @@ public class IrcClient
 	}
 	public void join (String join, String key) throws Exception
 	{
-		if (!join.startsWith("#"))
-			join = "#" + join;
+		join = checkChannel(join);
 		commando = "JOIN " + join + " " + key + "\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
 	public void join (String join) throws Exception
 	{
-		if (!join.startsWith("#"))
-			join = "#" + join;
+		join = checkChannel(join);
 		commando = "JOIN " + join + "\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
@@ -81,17 +79,17 @@ public class IrcClient
 		execute(commando, logLevel);
 	}
 
-	public void topic (String channel)
+	public void topic (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
 		commando = "TOPIC "+channel+"\r\n";
-		execute(commando, logLevel.CHAN);
+		execute(commando, LogLevel.CHAN);
 	}
-	public void topic (String channel,String topic)
+	public void topic (String channel,String topic) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "TOPIC "+channel+" "+topic+"\r\n";
-		execute(commando, logLevel.CHAN);
+		commando = "TOPIC "+channel+" :"+topic+"\r\n";
+		execute(commando, LogLevel.CHAN);
 	}
 
 
@@ -144,4 +142,5 @@ public class IrcClient
 		if (!channel.startsWith("#"))
 			channel = "#" + channel;
 		return channel;
+	}
 }
