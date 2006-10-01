@@ -7,8 +7,9 @@ public class Arpobot
 	final static String nick1 = "ArvoXbot";
 	final static String nick2 = "ArvoXbotAlpha";
 	final static String kanal = "#ArvoX";
+	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot på dnttah -- http://word.arvox.dk :)";
 
-	final static String version = "svn $Revision: 9 $ $Date: 2006-10-01 11:25:22 +0200 (sø, 01 okt 2006) $";
+	final static String version = "svn $Revision: 9 $ $Date: 2006-10-01 11:25:22 +0200 (sÃ¸, 01 okt 2006) $";
 	String nick;
 
 	public static void main(String[] args) throws Exception
@@ -86,6 +87,15 @@ public class Arpobot
 				if (linje.toLowerCase().indexOf("version") >= 0)
 				{
 					bot.notice(sendernick,"Jeg er i "+ version);
+				}
+			}
+			if (linje.indexOf("TOPIC "+kanal+" :") >= 0)
+			{
+				i = linje.indexOf(" :");
+				String _topic = linje.substring(i+2);
+				if (!_topic.equals(topic))
+				{
+					bot.topic(kanal, topic);
 				}
 			}
 		}
