@@ -13,7 +13,7 @@ public class Arpobot
 
 	public static void main(String[] args) throws Exception
 	{
-		IrcClient bot =  new IrcClient();
+
 		String nick = null;
 		String servername = null;
 		int code;
@@ -22,7 +22,8 @@ public class Arpobot
 		int i;
 		String sendernick;
 
-		bot.setServer(server , port);
+		IrcClient bot =  new IrcClient(server , port);
+		//bot.setServer(server , port);
 		bot.connect();
 
 		System.out.println(nick1 +"@"+server+":"+port);
