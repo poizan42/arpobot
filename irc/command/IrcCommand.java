@@ -1,15 +1,15 @@
 package irc.command;
 
-import java.util;
+import java.util.*;
 
 public class IrcCommand
 {
-	private static HashTable<String, IrcCommand> commands = new HashSet<IrcCommand>;
+	private static HashMap<String, IrcCommand> commands = new HashMap<String, IrcCommand>();
 	
 	private String fullCommand, commandName, sender;
 
-	//Skal kaldes i en static blok i alle underklasser der tilhører en eller flere bestemte kommandoer
-	public static AddCommand(IrcCommand cmd, String name)
+	//Skal kaldes i en static blok i alle underklasser der tilhoerer en eller flere bestemte kommandoer
+	public static void AddCommand(IrcCommand cmd, String name)
 	{
 		commands.put(name, cmd);
 	}
@@ -36,7 +36,8 @@ public class IrcCommand
 	
 	public static IrcCommand parse(String cmdstr)
 	{
-		
+		//TODO: Implementer :)
+		return null;
 	}
 
 }
