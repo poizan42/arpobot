@@ -7,9 +7,9 @@ public class Arpobot
 	final static String nick1 = "ArvoXbot";
 	final static String nick2 = "ArvoXbotAlpha";
 	final static String kanal = "#ArvoX";
-	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot på dnttah -- http://word.arvox.dk :)";
+	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot fra dnttah -- http://word.arvox.dk :)";
 
-	final static String version = "svn $Revision: 9 $ $Date: 2006-10-01 11:25:22 +0200 (sÃ¸, 01 okt 2006) $";
+	final static String version = "svn $Revision$ $Date$";
 	String nick;
 
 	public static void main(String[] args) throws Exception
