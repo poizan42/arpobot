@@ -81,9 +81,22 @@ public class IrcClient
 		execute(commando, logLevel);
 	}
 
+	public void topic (String channel)
+	{
+		channel = checkChannel(channel);
+		commando = "TOPIC "+channel+"\r\n";
+		execute(commando, logLevel.CHAN);
+	}
+	public void topic (String channel,String topic)
+	{
+		channel = checkChannel(channel);
+		commando = "TOPIC "+channel+" "+topic+"\r\n";
+		execute(commando, logLevel.CHAN);
+	}
 
 
-/******/
+
+/**Non irc command**/
 	private void execute(String commando, LogLevel logLevel) throws Exception
 	{
 		this.skriv.write(commando);
@@ -98,6 +111,19 @@ public class IrcClient
 		this.skriv = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
 		this.laes = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 	}
+
+	public IrcClient (String server,int port)
+	{
+		this.server = server;
+		this.port = 6667;
+	}
+	public IrcClient (String server)
+	{
+		this.server = server;
+		this.port = port;
+	}
+
+
 	public void setServer(String server)
 	{
 		this.server = server;
@@ -112,4 +138,10 @@ public class IrcClient
 	{
 		return this.laes.readLine();
 	}
+
+	private String checkChannel(String channel)
+	{
+		if (!channel.startsWith("#"))
+			channel = "#" + channel;
+		return channel;
 }
