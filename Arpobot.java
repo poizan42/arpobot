@@ -1,25 +1,28 @@
 import irc.IrcClient;
+import irc.command.*;
 import http.HttpClient;
 public class Arpobot
 {
 	final static String server = "dk.quakenet.org";
 	final static int port = 6667;
 
-	final static String nick1 = "ArvoXbot";
-	final static String nick2 = "ArvoXbotAlpha";
+	final static String username = "ArvoXbot";
+	final static String realname = "ArvoXbot";
+	final static String nick1 = "ArvoXbot-inputparse";
+	final static String nick2 = "ArvoXbot-inputparse2";
 	final static String kanal = "#ArvoX";
 	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot fra dnttah -- http://word.arvox.dk :)";
 
-	final static String version = "svn $Revision$ $Date$";
+	final static String version = "svn $Revision: 31 $ $Date: 2006-10-01 22:02:59 +0200 (sø, 01 okt 2006) $";
 	String nick;
 
-	public static void main(String[] args) throws Exception
+	public static void main(String[] args) throws Throwable
 	{
 
 		String nick = null;
 		String servername = null;
 		int code;
-		String linje;
+		IrcCommand kommando;
 		String skrivning;
 		int i;
 		String sendernick;
@@ -32,8 +35,40 @@ public class Arpobot
 		System.out.println(nick1 +"@"+server+":"+port);
 
 
-		while ((linje = bot.getLine()) != null)
+		while (true)
 		{
+		kommando = bot.getCommand();
+		if (kommando == null)
+			continue;
+		if (kommando.getCommandName().equals("372"))
+			continue; //gider vi ikke se på
+		
+		System.out.println("kommando: "+kommando.getCommandName());
+		System.out.println("nick: "+kommando.getNick());
+		System.out.println("user: "+kommando.getUser());
+		System.out.println("host: "+kommando.getHostOrNick());
+		System.out.println("params: "+kommando.getParamsStr());
+		System.out.println();
+		
+		if (kommando.getCommandName().equals("NOTICE") && kommando.getParamsStr().equals("AUTH :*** Checking Ident"))
+		{
+			// Saetter nick and username
+			bot.nick(nick1);
+			bot.user(username,realname);
+			nick = nick1;
+		}
+		
+		if (kommando.getCommandName().equals("PING"))
+		{
+			bot.pong(kommando.getParamsStr());
+		}
+		
+		if (kommando.getCommandName().equals("001"))
+		{
+			bot.join(kanal);
+			bot.msg("Q@CServe.quakenet.org", "AUTH ArvoXbot QtD6JXt8");
+		}
+		
 /*	//finder servernavn
 		if (linje.startsWith(":") && servername == null)
 			{
@@ -52,7 +87,7 @@ public class Arpobot
 				catch (Exception error)
 				{}
 			}
-*/
+*//*
 			if (linje.indexOf("372 "+nick) < 0)
 				System.out.println("--> "+linje);
 			if (linje.indexOf("AUTH :*** Checking Ident") >= 0)
@@ -121,7 +156,7 @@ public class Arpobot
 					sender = linje.substring(1,i);
 					bot.notice(sender,http.google(search));
 				}
-			}
+			}*/
 
 		}
 	}

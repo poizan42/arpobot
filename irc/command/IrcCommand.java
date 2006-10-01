@@ -7,7 +7,7 @@ public class IrcCommand
 {
 	private static HashMap<String, Class<IrcCommand>> commands = new HashMap<String, Class<IrcCommand>>();
 	
-	private String fullCommand, commandName, nick, user, hostOrNick, paramsStr;
+	private String fullCommand, commandName, nick = "", user = "", hostOrNick = "", paramsStr;
 
 	//Skal kaldes i en static blok i alle underklasser der tilhoerer en eller flere bestemte kommandoer
 	public static void AddCommand(Class<IrcCommand> cmd, String name)
@@ -59,7 +59,7 @@ public class IrcCommand
 	}
 	
 	//Alle underklasser skal implementere denne
-	protected IrcCommand(String pFullCommand, String command, String[] prefix, String params)
+	public IrcCommand(String pFullCommand, String command, String[] prefix, String params)
 	{
 		fullCommand = pFullCommand;
 		commandName = command;
@@ -73,7 +73,7 @@ public class IrcCommand
 	}
 	
 	public static IrcCommand parse(String cmdstr) throws 
-		NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException
+		InstantiationException, IllegalAccessException, Throwable
 	{
 	/*
     message    =  [ ":" prefix SPACE ] command [ params ] crlf
@@ -104,7 +104,7 @@ public class IrcCommand
 			i = cmdstr.indexOf(' ');
 			
 			if ((i == -1) || (cmdstr.length() == i+1)) //burde være falsk - kommandonavnet skal staa efter praefikset
-				return new IrcCommand(cmdstr, null, null, null);
+				return new IrcCommand(cmdstr, "", null, "");
 				
 			prefixInf = parsePrefix(cmdstr.substring(1, i));
 			
@@ -116,7 +116,7 @@ public class IrcCommand
 		if ((i == -1) || (cmdstr.length() == i+1)) //ingen parametre - ingenting der skal parses specifikt
 		{
 			commandName = cmdstr;
-			params = null;
+			params = "";
 		}
 		else
 		{
@@ -130,8 +130,20 @@ public class IrcCommand
 			return new IrcCommand(cmdstr, commandName, prefixInf, params);
 		//finder konstruktoren
 		//String pFullCommand, String command, String[] prefix, String params
-		Constructor<IrcCommand> constructor = commandClass.getConstructor(String.class, String.class, String[].class, String.class);
-		return constructor.newInstance(fullCommand, commandName, prefixInf, params);
+		try
+		{
+			Constructor<IrcCommand> constructor = commandClass.getConstructor(String.class, String.class, String[].class, String.class);
+			return constructor.newInstance(fullCommand, commandName, prefixInf, params);
+		}
+		catch (NoSuchMethodException e)
+		{ // det burde være umuligt at havne her, da konstructoren er defineret i base klassen
+			System.out.println("ouuch!!");
+		}
+		catch (InvocationTargetException e)
+		{ 
+			throw e.getCause();
+		}
+		return null;
 	}
 
 	/*Parser prefix. Output: 
