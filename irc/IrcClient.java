@@ -12,7 +12,7 @@ public class IrcClient
 	private BufferedWriter skriv;
 	private BufferedReader laes;
 
-	public enum LogLevel {DEBUG, USERINF, CTCP, CHAN, PRIV};
+	public enum LogLevel {DEBUG, CONN, USERINF, CTCP, CHAN, PRIV};
 
 	public void pass (String pass) throws Exception
 	{
@@ -30,55 +30,40 @@ public class IrcClient
 		commando = "USER " + username + " " + mode + " * " + " : " + realname + "\r\n";
 		execute(commando, LogLevel.USERINF);
 	}
-	public void pong (String pong) throws Exception
+	public void oper (String user,String password) throws Exception
 	{
-		commando = "PONG " + pong.substring(5)+ "\r\n";
-		execute(commando, LogLevel.DEBUG);
+		commando = "OPER " + user + " " + password + "\r\n";
+		execute(commando, LogLevel.USERINF);
 	}
-	public void join (String join, String key) throws Exception
+	public void QUIT () throws Exception
 	{
-		join = checkChannel(join);
-		commando = "JOIN " + join + " " + key + "\r\n";
+		commando = "QUIT\r\n";
+		execute(commando, LogLevel.CONN);
+	}
+	public void QUIT (String message) throws Exception
+	{
+		commando = "QUIT " + message + "\r\n";
+		execute(commando, LogLevel.CONN);
+	}
+	public void join (String channel, String key) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "JOIN " + channel + " " + key + "\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
-	public void join (String join) throws Exception
+	public void join (String channel) throws Exception
 	{
-		join = checkChannel(join);
-		commando = "JOIN " + join + "\r\n";
+		channel = checkChannel(channel);
+		commando = "JOIN " + channel + "\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
-	public void msg (String receiver, String text) throws Exception
+	public void part (String channel) throws Exception
 	{
-		msg(receiver, text, LogLevel.PRIV);
+		channel = checkChannel(channel);
+		commando = "PART " + channel + "\r\n";
+		execute(commando, LogLevel.CHAN);
 	}
-
-	public void ctcpRequest (String receiver, String text) throws Exception
-	{
-		msg(receiver, '\u0001'+text+'\u0001', LogLevel.CTCP);
-	}
-
-	private void msg (String receiver, String text, LogLevel logLevel) throws Exception
-	{
-		commando = "PRIVMSG " + receiver + " :" + text + "\r\n";
-		execute(commando, logLevel);
-	}
-
-	public void notice (String receiver, String text) throws Exception
-	{
-		notice(receiver, text, LogLevel.PRIV);
-	}
-
-	public void ctcpReply (String receiver, String text) throws Exception
-	{
-		notice(receiver, '\u0001'+text+'\u0001', LogLevel.CTCP);
-	}
-
-	private void notice (String receiver, String text, LogLevel logLevel) throws Exception
-	{
-		commando = "NOTICE " + receiver + " :" + text + "\r\n";
-		execute(commando, logLevel);
-	}
-
+// mode skal være her
 	public void topic (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
@@ -91,8 +76,79 @@ public class IrcClient
 		commando = "TOPIC "+channel+" :"+topic+"\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
+//names skal være her
+//list skal være her
+	public void invite (String nick, String channel) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "INVITE " + nick + " " + channel + "\r\n";
+		execute(commando, LogLevel.CHAN);
+	}
+	public void kick (String user, String channel) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "KICK " + channel + " " + user + "\r\n";
+		execute(commando, LogLevel.CHAN);
+	}
+	public void kick (String user, String channel, String comment) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "KICK " + channel + " " + user + " :" + comment + "\r\n";
+		execute(commando, LogLevel.CHAN);
+	}
+/*version
+  time
+  trace
+  admin
+  info
+skal være her*/
+	//PRIVMSG:
+	public void msg (String receiver, String text) throws Exception
+	{
+		msg(receiver, text, LogLevel.PRIV);
+	}
+	private void msg (String receiver, String text, LogLevel logLevel) throws Exception
+	{
+		commando = "PRIVMSG " + receiver + " :" + text + "\r\n";
+		execute(commando, logLevel);
+	}
+	public void notice (String receiver, String text) throws Exception
+	{
+		notice(receiver, text, LogLevel.PRIV);
+	}
+	private void notice (String receiver, String text, LogLevel logLevel) throws Exception
+	{
+		commando = "NOTICE " + receiver + " :" + text + "\r\n";
+		execute(commando, logLevel);
+	}
+/*who
+  whois
+  whowas
+  kill
+  ping
+skal være her*/
+	public void pong (String daemon) throws Exception
+	{
+		commando = "PONG " + daemon.substring(5)+ "\r\n";
+		execute(commando, LogLevel.DEBUG);
+	}
+/*away
+  rehash
+  restart
+  users
+  userhost
+  ison
+skal være her*/
 
-
+/**ctcp**/
+	public void ctcpRequest (String receiver, String text) throws Exception
+	{
+		msg(receiver, '\u0001'+text+'\u0001', LogLevel.CTCP);
+	}
+	public void ctcpReply (String receiver, String text) throws Exception
+	{
+		notice(receiver, '\u0001'+text+'\u0001', LogLevel.CTCP);
+	}
 
 /**Non irc command**/
 	private void execute(String commando, LogLevel logLevel) throws Exception
