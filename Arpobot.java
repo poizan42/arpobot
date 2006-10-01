@@ -1,5 +1,3 @@
-package arpobot;
-
 import java.io.*;
 import java.net.*;
 
@@ -123,7 +121,7 @@ public class Arpobot
 	final static String nick2 = "ArvoXbotAlpha";
 	final static String kanal = "#ArvoX";
 
-	final static String version = "svn $Revision$ $Date$";
+	final static String version = "svn $Revision: 9 $ $Date: 2006-10-01 11:25:22 +0200 (sø, 01 okt 2006) $";
 	String nick;
 
 	public static void main(String[] args) throws Exception
