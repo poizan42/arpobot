@@ -15,6 +15,10 @@ public class IrcCommand
 		commands.put(name, cmd);
 	}
 	
+	static {
+		AddCommand(IrcCommand.class, "PING");
+	}
+	
 	public String getCommandName()
 	{
 		return commandName;
