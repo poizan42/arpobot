@@ -63,7 +63,7 @@ public class IrcClient
 		commando = "PART " + channel + "\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
-// mode skal være her
+// mode skal vaere her
 	public void topic (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
@@ -76,8 +76,8 @@ public class IrcClient
 		commando = "TOPIC "+channel+" :"+topic+"\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
-//names skal være her
-//list skal være her
+//names skal vaere her
+//list skal vaere her
 	public void invite (String nick, String channel) throws Exception
 	{
 		channel = checkChannel(channel);
@@ -101,7 +101,7 @@ public class IrcClient
   trace
   admin
   info
-skal være her*/
+skal vaere her*/
 	//PRIVMSG:
 	public void msg (String receiver, String text) throws Exception
 	{
@@ -126,7 +126,7 @@ skal være her*/
   whowas
   kill
   ping
-skal være her*/
+skal vaere her*/
 	public void pong (String daemon) throws Exception
 	{
 		commando = "PONG " + daemon.substring(5)+ "\r\n";
@@ -138,7 +138,7 @@ skal være her*/
   users
   userhost
   ison
-skal være her*/
+skal vaere her*/
 
 /**ctcp**/
 	public void ctcpRequest (String receiver, String text) throws Exception
