@@ -212,6 +212,6 @@ public class IrcCommand
 			list.add(S);
 		}
 		
-		return (String[]) list.toArray();
+		return list.toArray(new String[]{});
 	}
 }
