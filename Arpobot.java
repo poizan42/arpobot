@@ -64,7 +64,7 @@ public class Arpobot
 		
 		if (kommando.getCommandName().equals("PING"))
 		{
-			bot.pong(kommando.getParamsStr());
+			bot.pong(kommando.getParameters()[0]);
 		}
 		
 		if (kommando.getCommandName().equals("001"))
