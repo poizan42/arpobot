@@ -9,8 +9,8 @@ public class HttpClient
 	private int port;
 	private int i;
 	Socket forbindelse;
-	OutputStream binærUd;
-	InputStream binærInd;
+	OutputStream binUd;
+	InputStream binInd;
 	PrintWriter ud;
 	BufferedReader ind;
 
@@ -49,10 +49,10 @@ public class HttpClient
 	private void connect() throws Exception
 	{
 		forbindelse = new Socket(this.host,this.port);
-		binærUd  = forbindelse.getOutputStream();
-		binærInd = forbindelse.getInputStream();
-		ud  = new PrintWriter(binærUd);
-		ind = new BufferedReader(new InputStreamReader(binærInd));
+		binUd  = forbindelse.getOutputStream();
+		binInd = forbindelse.getInputStream();
+		ud  = new PrintWriter(binUd);
+		ind = new BufferedReader(new InputStreamReader(binInd));
 	}
 	private void httpGET(String request)
 	{
