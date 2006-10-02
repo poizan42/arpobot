@@ -8,6 +8,7 @@ public class IrcCommand
 	private static HashMap<String, Class<IrcCommand>> commands = new HashMap<String, Class<IrcCommand>>();
 	
 	private String fullCommand, commandName, nick = "", user = "", hostOrNick = "", paramsStr;
+	private String[] parameters;
 
 	//Skal kaldes i en static blok i alle underklasser der tilhoerer en eller flere bestemte kommandoer
 	public static void AddCommand(Class<IrcCommand> cmd, String name)
@@ -49,6 +50,11 @@ public class IrcCommand
 		return paramsStr;
 	}
 	
+	public String[] getParameters()
+	{
+		return parameters;
+	}
+	
 	public String toString()
 	{
 		return fullCommand;
@@ -70,10 +76,10 @@ public class IrcCommand
 			user = prefix[2];
 		}
 		paramsStr = params;
+		parameters = parseParams(params);
 	}
 	
-	public static IrcCommand parse(String cmdstr) throws 
-		InstantiationException, IllegalAccessException, Throwable
+	public static IrcCommand parse(String cmdstr) throws Throwable
 	{
 	/*
     message    =  [ ":" prefix SPACE ] command [ params ] crlf
@@ -135,15 +141,10 @@ public class IrcCommand
 			Constructor<IrcCommand> constructor = commandClass.getConstructor(String.class, String.class, String[].class, String.class);
 			return constructor.newInstance(fullCommand, commandName, prefixInf, params);
 		}
-		catch (NoSuchMethodException e)
-		{ // det burde være umuligt at havne her, da konstructoren er defineret i base klassen
-			System.out.println("ouuch!!");
-		}
 		catch (InvocationTargetException e)
 		{ 
 			throw e.getCause();
 		}
-		return null;
 	}
 
 	/*Parser prefix. Output: 
@@ -170,5 +171,47 @@ public class IrcCommand
 		nick = nick.substring(0, i);
 		
 		return new String[]{host, nick, user};
+	}
+	
+	public static String[] parseParams(String params)
+	{
+		int i, nextSpace;
+		String S;
+		
+		if ((params == null) || (params.length() == 0) || (params.charAt(0) == ' '))
+			return new String[]{}; //ingen parametre
+		
+		ArrayList<String> list = new ArrayList<String>();
+		i = params.indexOf(' ');
+		
+		while (i != -1)
+		{
+			if (params.charAt(i+1) == ':')
+			{
+				if (i == params.length() -2) //tjekker om der kommer noget efter kolonet
+					S = "";
+				else
+					S = params.substring(i+2);
+				i = -1;
+			}
+			else
+			{
+				nextSpace = params.indexOf(' ', i+1);
+				nextSpace = params.indexOf(' ', i+1);
+				if ((nextSpace == -1) ||(nextSpace == params.length() -1))
+				{
+					S = params.substring(i+1);
+					i = -1;
+				}
+				else
+				{
+					S = params.substring(i+1, nextSpace);
+					i = nextSpace;
+				}
+			}
+			list.add(S);
+		}
+		
+		return (String[]) list.toArray();
 	}
 }

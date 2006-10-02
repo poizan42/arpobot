@@ -48,6 +48,10 @@ public class Arpobot
 		System.out.println("user: "+kommando.getUser());
 		System.out.println("host: "+kommando.getHostOrNick());
 		System.out.println("params: "+kommando.getParamsStr());
+		for (String s : kommando.getParameters())
+		{
+			System.out.println("parameter: "+s);
+		}
 		System.out.println();
 		
 		if (kommando.getCommandName().equals("NOTICE") && kommando.getParamsStr().equals("AUTH :*** Checking Ident"))

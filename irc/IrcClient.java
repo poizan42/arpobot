@@ -130,7 +130,7 @@ skal være her*/
 skal være her*/
 	public void pong (String daemon) throws Exception
 	{
-		commando = "PONG " + daemon + "\r\n";
+		commando = "PONG :" + daemon + "\r\n";
 		execute(commando, LogLevel.DEBUG);
 	}
 /*away
