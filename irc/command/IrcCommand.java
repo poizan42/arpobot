@@ -182,31 +182,30 @@ public class IrcCommand
 			return new String[]{}; //ingen parametre
 		
 		ArrayList<String> list = new ArrayList<String>();
-		i = params.indexOf(' ');
+		i = 0;
 		
 		while (i != -1)
 		{
-			if (params.charAt(i+1) == ':')
+			if (params.charAt(i) == ':')
 			{
-				if (i == params.length() -2) //tjekker om der kommer noget efter kolonet
+				if (i == params.length() -1) //tjekker om der kommer noget efter kolonet
 					S = "";
 				else
-					S = params.substring(i+2);
+					S = params.substring(i+1);
 				i = -1;
 			}
 			else
 			{
-				nextSpace = params.indexOf(' ', i+1);
-				nextSpace = params.indexOf(' ', i+1);
+				nextSpace = params.indexOf(' ', i);
 				if ((nextSpace == -1) ||(nextSpace == params.length() -1))
 				{
-					S = params.substring(i+1);
+					S = params.substring(i);
 					i = -1;
 				}
 				else
 				{
-					S = params.substring(i+1, nextSpace);
-					i = nextSpace;
+					S = params.substring(i, nextSpace);
+					i = nextSpace+1;
 				}
 			}
 			list.add(S);
