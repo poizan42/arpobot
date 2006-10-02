@@ -7,7 +7,7 @@ public class IrcCommand
 {
 	private static HashMap<String, Class<IrcCommand>> commands = new HashMap<String, Class<IrcCommand>>();
 	
-	private String fullCommand, commandName, nick = "", user = "", hostOrNick = "", paramsStr;
+	private String fullCommand, commandName, nick = "", user = "", host = "", paramsStr;
 	private String[] parameters;
 
 	//Skal kaldes i en static blok i alle underklasser der tilhoerer en eller flere bestemte kommandoer
@@ -40,9 +40,9 @@ public class IrcCommand
 		return user;
 	}
 	
-	public String getHostOrNick()
+	public String getHost()
 	{
-		return hostOrNick;
+		return host;
 	}
 	
 	public String getParamsStr()
@@ -71,7 +71,7 @@ public class IrcCommand
 		commandName = command;
 		if ((prefix != null) && (prefix.length == 3))
 		{
-			hostOrNick = prefix[0];
+			host = prefix[0];
 			nick = prefix[1];
 			user = prefix[2];
 		}
@@ -109,7 +109,7 @@ public class IrcCommand
 		{
 			i = cmdstr.indexOf(' ');
 			
-			if ((i == -1) || (cmdstr.length() == i+1)) //burde være falsk - kommandonavnet skal staa efter praefikset
+			if ((i == -1) || (cmdstr.length() == i+1)) //burde vaere falsk - kommandonavnet skal staa efter praefikset
 				return new IrcCommand(cmdstr, "", null, "");
 				
 			prefixInf = parsePrefix(cmdstr.substring(1, i));
@@ -148,7 +148,7 @@ public class IrcCommand
 	}
 
 	/*Parser prefix. Output: 
-	0: host/server/nick
+	0: host
 	1: nick
 	2: user
 	*/
@@ -159,14 +159,17 @@ public class IrcCommand
 		String nick, user, host;
 		
 		i = prefix.indexOf('@');
-		if (i == -1) // intet @ saa er det enten kun server eller kun nick
-			return new String[]{prefix, null, null};
+		if (i == -1) // intet @ saa er det kun nick
+			return new String[]{"", prefix, ""};
 		
-		host = prefix.substring(i+1);
+		if (i == prefix.length() -1) //malformed...
+			host = "";
+		else
+			host = prefix.substring(i+1);
 		nick = prefix.substring(0, i); //nick indeholder enten nickname eller nickname!user
 		i = nick.indexOf('!');
 		if (i == -1)
-			return new String[]{host, nick, null};
+			return new String[]{host, nick, ""};
 		user = nick.substring(i+1);
 		nick = nick.substring(0, i);
 		

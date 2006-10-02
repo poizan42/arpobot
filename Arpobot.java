@@ -46,7 +46,7 @@ public class Arpobot
 		System.out.println("kommando: "+kommando.getCommandName());
 		System.out.println("nick: "+kommando.getNick());
 		System.out.println("user: "+kommando.getUser());
-		System.out.println("host: "+kommando.getHostOrNick());
+		System.out.println("host: "+kommando.getHost());
 		System.out.println("params: "+kommando.getParamsStr());
 		for (String s : kommando.getParameters())
 		{
