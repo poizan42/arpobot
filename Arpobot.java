@@ -44,7 +44,7 @@ public class Arpobot
 			continue; //gider vi ikke se på
 		
 		System.out.println("kommando: "+kommando.getCommandName());
-		System.out.println("nick: "+kommando.getNick());
+		System.out.println("nick el. server: "+kommando.getNickOrServer());
 		System.out.println("user: "+kommando.getUser());
 		System.out.println("host: "+kommando.getHost());
 		System.out.println("params: "+kommando.getParamsStr());

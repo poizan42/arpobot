@@ -7,7 +7,7 @@ public class IrcCommand
 {
 	private static HashMap<String, Class<IrcCommand>> commands = new HashMap<String, Class<IrcCommand>>();
 	
-	private String fullCommand, commandName, nick = "", user = "", host = "", paramsStr;
+	private String fullCommand, commandName, nickOrServer = "", user = "", host = "", paramsStr;
 	private String[] parameters;
 
 	//Skal kaldes i en static blok i alle underklasser der tilhoerer en eller flere bestemte kommandoer
@@ -30,9 +30,9 @@ public class IrcCommand
 		return fullCommand;
 	}
 
-	public String getNick()
+	public String getNickOrServer()
 	{
-		return nick;
+		return nickOrServer;
 	}
 	
 	public String getUser()
@@ -72,7 +72,7 @@ public class IrcCommand
 		if ((prefix != null) && (prefix.length == 3))
 		{
 			host = prefix[0];
-			nick = prefix[1];
+			nickOrServer = prefix[1];
 			user = prefix[2];
 		}
 		paramsStr = params;
@@ -149,31 +149,31 @@ public class IrcCommand
 
 	/*Parser prefix. Output: 
 	0: host
-	1: nick
+	1: nickOrServer
 	2: user
 	*/
 	public static String[] parsePrefix(String prefix)
 	{
 		//prefix     =  servername / ( nickname [ [ "!" user ] "@" host ] )
 		int i;
-		String nick, user, host;
+		String nickOrServer, user, host;
 		
 		i = prefix.indexOf('@');
-		if (i == -1) // intet @ saa er det kun nick
+		if (i == -1) // intet @ saa er det kun nick eller server
 			return new String[]{"", prefix, ""};
 		
 		if (i == prefix.length() -1) //malformed...
 			host = "";
 		else
 			host = prefix.substring(i+1);
-		nick = prefix.substring(0, i); //nick indeholder enten nickname eller nickname!user
-		i = nick.indexOf('!');
+		nickOrServer = prefix.substring(0, i); //nickOrServer indeholder enten nickname eller nickname!user
+		i = nickOrServer.indexOf('!');
 		if (i == -1)
-			return new String[]{host, nick, ""};
-		user = nick.substring(i+1);
-		nick = nick.substring(0, i);
+			return new String[]{host, nickOrServer, ""};
+		user = nickOrServer.substring(i+1);
+		nickOrServer = nickOrServer.substring(0, i);
 		
-		return new String[]{host, nick, user};
+		return new String[]{host, nickOrServer, user};
 	}
 	
 	public static String[] parseParams(String params)
