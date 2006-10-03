@@ -1,1 +1,1 @@
-s/^\([0-9]\{3\}\)\s\{1,\}\([a-zA-Z_][a-zA-Z0-9_]*\)/*\/final static String \2 = "\1"; \/*/
+s/^\([0-9]\{3\}\)\s\{1,\}\([a-zA-Z_][a-zA-Z0-9_]*\)/*\/public final static String \2 = "\1"; \/*/

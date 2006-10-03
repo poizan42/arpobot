@@ -1,3 +1,5 @@
+package irc;
+
 public class IrcNumerics
 {
 	/*
@@ -7,19 +9,19 @@ public class IrcNumerics
 	to 399.
 	*/
 
-final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Network <nick>!<user>@<host>"
-*/final static String RPL_YOURHOST = "002"; /* "Your host is <servername>, running version <ver>"
-*/final static String RPL_CREATED = "003"; /* "This server was created <date>"
-*/final static String RPL_MYINFO = "004"; /* "<servername> <version> <available user modes> <available channel modes>"
+public final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Network <nick>!<user>@<host>"
+*/public final static String RPL_YOURHOST = "002"; /* "Your host is <servername>, running version <ver>"
+*/public final static String RPL_CREATED = "003"; /* "This server was created <date>"
+*/public final static String RPL_MYINFO = "004"; /* "<servername> <version> <available user modes> <available channel modes>"
 
 //- The server sends Replies 001 to 004 to a user upon successful registration.
 
-*/final static String RPL_BOUNCE = "005"; /* "Try server <server name>, port <port number>" //??
+*/public final static String RPL_BOUNCE = "005"; /* "Try server <server name>, port <port number>" //??
 
 
 
 
-*/final static String RPL_USERHOST = "302"; /* ":*1<reply> *( " " <reply> )"
+*/public final static String RPL_USERHOST = "302"; /* ":*1<reply> *( " " <reply> )"
 
  - Reply format used by USERHOST to list replies to
    the query list.  The reply string is composed as
@@ -32,10 +34,10 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    whether the client has set an AWAY message or not
    respectively.
 
-*/final static String RPL_ISON = "303"; /* ":*1<nick> *( " " <nick> )"
-*/final static String RPL_AWAY = "301"; /* "<nick> :<away message>"
-*/final static String RPL_UNAWAY = "305"; /* ":You are no longer marked as being away"
-*/final static String RPL_NOWAWAY = "306"; /* ":You have been marked as being away"
+*/public final static String RPL_ISON = "303"; /* ":*1<nick> *( " " <nick> )"
+*/public final static String RPL_AWAY = "301"; /* "<nick> :<away message>"
+*/public final static String RPL_UNAWAY = "305"; /* ":You are no longer marked as being away"
+*/public final static String RPL_NOWAWAY = "306"; /* ":You have been marked as being away"
 
  - These replies are used with the AWAY command (if
    allowed).  RPL_AWAY is sent to any client sending a
@@ -44,12 +46,12 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    Replies RPL_UNAWAY and RPL_NOWAWAY are sent when the
    client removes and sets an AWAY message.
 
-*/final static String RPL_WHOISUSER = "311"; /* "<nick> <user> <host> * :<real name>"
-*/final static String RPL_WHOISSERVER = "312"; /* "<nick> <server> :<server info>"
-*/final static String RPL_WHOISOPERATOR = "313"; /* "<nick> :is an IRC operator"
-*/final static String RPL_WHOISIDLE = "317"; /* "<nick> <integer> :seconds idle"
-*/final static String RPL_ENDOFWHOIS = "318"; /* "<nick> :End of WHOIS list"
-*/final static String RPL_WHOISCHANNELS = "319"; /* "<nick> :*( ( "@" / "+" ) <channel> " " )"
+*/public final static String RPL_WHOISUSER = "311"; /* "<nick> <user> <host> * :<real name>"
+*/public final static String RPL_WHOISSERVER = "312"; /* "<nick> <server> :<server info>"
+*/public final static String RPL_WHOISOPERATOR = "313"; /* "<nick> :is an IRC operator"
+*/public final static String RPL_WHOISIDLE = "317"; /* "<nick> <integer> :seconds idle"
+*/public final static String RPL_ENDOFWHOIS = "318"; /* "<nick> :End of WHOIS list"
+*/public final static String RPL_WHOISCHANNELS = "319"; /* "<nick> :*( ( "@" / "+" ) <channel> " " )"
  - Replies 311 - 313, 317 - 319 are all replies
    generated in response to a WHOIS message.  Given that
    there are enough parameters present, the answering
@@ -65,50 +67,50 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    channel.  The RPL_ENDOFWHOIS reply is used to mark
    the end of processing a WHOIS message.
 
-*/final static String RPL_WHOWASUSER = "314"; /* "<nick> <user> <host> * :<real name>"
-*/final static String RPL_ENDOFWHOWAS = "369"; /*	"<nick> :End of WHOWAS"
+*/public final static String RPL_WHOWASUSER = "314"; /* "<nick> <user> <host> * :<real name>"
+*/public final static String RPL_ENDOFWHOWAS = "369"; /*	"<nick> :End of WHOWAS"
  - When replying to a WHOWAS message, a server MUST use
    the replies RPL_WHOWASUSER, RPL_WHOISSERVER or
    ERR_WASNOSUCHNICK for each nickname in the presented
    list.  At the end of all reply batches, there MUST
    be RPL_ENDOFWHOWAS (even if there was only one reply
    and it was an error).
-*/final static String RPL_LISTSTART = "321"; /* Obsolete. Not used.
-*/final static String RPL_LIST = "322"; /* "<channel> <# visible> :<topic>"
-*/final static String RPL_LISTEND = "323"; /* ":End of LIST"
+*/public final static String RPL_LISTSTART = "321"; /* Obsolete. Not used.
+*/public final static String RPL_LIST = "322"; /* "<channel> <# visible> :<topic>"
+*/public final static String RPL_LISTEND = "323"; /* ":End of LIST"
  - Replies RPL_LIST, RPL_LISTEND mark the actual replies
    with data and end of the server's response to a LIST
    command.  If there are no channels available to return,
    only the end reply MUST be sent.
 
-*/final static String RPL_UNIQOPIS = "325"; /* "<channel> <nickname>"
-*/final static String RPL_CHANNELMODEIS = "324"; /* "<channel> <mode> <mode params>"
-*/final static String RPL_NOTOPIC = "331"; /* "<channel> :No topic is set"
-*/final static String RPL_TOPIC = "332"; /* "<channel> :<topic>"
+*/public final static String RPL_UNIQOPIS = "325"; /* "<channel> <nickname>"
+*/public final static String RPL_CHANNELMODEIS = "324"; /* "<channel> <mode> <mode params>"
+*/public final static String RPL_NOTOPIC = "331"; /* "<channel> :No topic is set"
+*/public final static String RPL_TOPIC = "332"; /* "<channel> :<topic>"
  - When sending a TOPIC message to determine the
    channel topic, one of two replies is sent.  If
    the topic is set, RPL_TOPIC is sent back else
    RPL_NOTOPIC.
 
-*/final static String RPL_INVITING = "341"; /* "<channel> <nick>"
+*/public final static String RPL_INVITING = "341"; /* "<channel> <nick>"
  - Returned by the server to indicate that the
    attempted INVITE message was successful and is
    being passed onto the end client.
 
-*/final static String RPL_SUMMONING = "342"; /* "<user> :Summoning user to IRC"
+*/public final static String RPL_SUMMONING = "342"; /* "<user> :Summoning user to IRC"
  - Returned by a server answering a SUMMON message to
    indicate that it is summoning that user.
 
-*/final static String RPL_INVITELIST = "346"; /* "<channel> <invitemask>"
-*/final static String RPL_ENDOFINVITELIST = "347"; /* "<channel> :End of channel invite list"
+*/public final static String RPL_INVITELIST = "346"; /* "<channel> <invitemask>"
+*/public final static String RPL_ENDOFINVITELIST = "347"; /* "<channel> :End of channel invite list"
  - When listing the 'invitations masks' for a given channel,
    a server is required to send the list back using the
    RPL_INVITELIST and RPL_ENDOFINVITELIST messages.  A
    separate RPL_INVITELIST is sent for each active mask.
    After the masks have been listed (or if none present) a
    RPL_ENDOFINVITELIST MUST be sent.
-*/final static String RPL_EXCEPTLIST = "348"; /* "<channel> <exceptionmask>"
-*/final static String RPL_ENDOFEXCEPTLIST = "349"; /* "<channel> :End of channel exception list"
+*/public final static String RPL_EXCEPTLIST = "348"; /* "<channel> <exceptionmask>"
+*/public final static String RPL_ENDOFEXCEPTLIST = "349"; /* "<channel> :End of channel exception list"
  - When listing the 'exception masks' for a given channel,
    a server is required to send the list back using the
    RPL_EXCEPTLIST and RPL_ENDOFEXCEPTLIST messages.  A
@@ -116,7 +118,7 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    After the masks have been listed (or if none present)
    a RPL_ENDOFEXCEPTLIST MUST be sent.
 
-*/final static String RPL_VERSION = "351"; /* "<version>.<debuglevel> <server> :<comments>"
+*/public final static String RPL_VERSION = "351"; /* "<version>.<debuglevel> <server> :<comments>"
  - Reply by the server showing its version details.
    The <version> is the version of the software being
    used (including any patchlevel revisions) and the
@@ -126,8 +128,8 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    The "comments" field may contain any comments about
    the version or further version details.
 
-*/final static String RPL_WHOREPLY = "352"; /* "<channel> <user> <host> <server> <nick> ( "H" / "G" > ["*"] [ ( "@" / "+" ) ] :<hopcount> <real name>"
-*/final static String RPL_ENDOFWHO = "315"; /* "<name> :End of WHO list"
+*/public final static String RPL_WHOREPLY = "352"; /* "<channel> <user> <host> <server> <nick> ( "H" / "G" > ["*"] [ ( "@" / "+" ) ] :<hopcount> <real name>"
+*/public final static String RPL_ENDOFWHO = "315"; /* "<name> :End of WHO list"
  - The RPL_WHOREPLY and RPL_ENDOFWHO pair are used
    to answer a WHO message.  The RPL_WHOREPLY is only
    sent if there is an appropriate match to the WHO
@@ -136,11 +138,11 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    after processing each list item with <name> being
    the item.
 
-*/final static String RPL_NAMREPLY = "353"; /* "( "=" / "*" / "@" ) <channel> :[ "@" / "+" ] <nick> *( " " [ "@" / "+" ] <nick> )"
+*/public final static String RPL_NAMREPLY = "353"; /* "( "=" / "*" / "@" ) <channel> :[ "@" / "+" ] <nick> *( " " [ "@" / "+" ] <nick> )"
  - "@" is used for secret channels, "*" for private
    channels, and "=" for others (public channels).
 
-*/final static String RPL_ENDOFNAMES = "366"; /* "<channel> :End of NAMES list"
+*/public final static String RPL_ENDOFNAMES = "366"; /* "<channel> :End of NAMES list"
  - To reply to a NAMES message, a reply pair consisting
    of RPL_NAMREPLY and RPL_ENDOFNAMES is sent by the
    server back to the client.  If there is no channel
@@ -151,14 +153,14 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    RPL_NAMEREPLY messages with a RPL_ENDOFNAMES to mark
    the end.
 
-*/final static String RPL_LINKS = "364"; /* "<mask> <server> :<hopcount> <server info>"
-*/final static String RPL_ENDOFLINKS = "365"; /* "<mask> :End of LINKS list"
+*/public final static String RPL_LINKS = "364"; /* "<mask> <server> :<hopcount> <server info>"
+*/public final static String RPL_ENDOFLINKS = "365"; /* "<mask> :End of LINKS list"
  - In replying to the LINKS message, a server MUST send
    replies back using the RPL_LINKS numeric and mark the
    end of the list using an RPL_ENDOFLINKS reply.
 
-*/final static String RPL_BANLIST = "367"; /* "<channel> <banmask>"
-*/final static String RPL_ENDOFBANLIST = "368"; /* "<channel> :End of channel ban list"
+*/public final static String RPL_BANLIST = "367"; /* "<channel> <banmask>"
+*/public final static String RPL_ENDOFBANLIST = "368"; /* "<channel> :End of channel ban list"
  - When listing the active 'bans' for a given channel,
    a server is required to send the list back using the
    RPL_BANLIST and RPL_ENDOFBANLIST messages.  A separate
@@ -166,16 +168,16 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    banmasks have been listed (or if none present) a
    RPL_ENDOFBANLIST MUST be sent.
 
-*/final static String RPL_INFO = "371"; /* ":<string>"
-*/final static String RPL_ENDOFINFO = "374"; /* ":End of INFO list"
+*/public final static String RPL_INFO = "371"; /* ":<string>"
+*/public final static String RPL_ENDOFINFO = "374"; /* ":End of INFO list"
  - A server responding to an INFO message is required to
    send all its 'info' in a series of RPL_INFO messages
    with a RPL_ENDOFINFO reply to indicate the end of the
    replies.
 
-*/final static String RPL_MOTDSTART = "375"; /* ":- <server> Message of the day - "
-*/final static String RPL_MOTD = "372"; /* ":- <text>"
-*/final static String RPL_ENDOFMOTD = "376"; /* ":End of MOTD command"
+*/public final static String RPL_MOTDSTART = "375"; /* ":- <server> Message of the day - "
+*/public final static String RPL_MOTD = "372"; /* ":- <text>"
+*/public final static String RPL_ENDOFMOTD = "376"; /* ":End of MOTD command"
  - When responding to the MOTD message and the MOTD file
    is found, the file is displayed line by line, with
    each line no longer than 80 characters, using
@@ -183,31 +185,31 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    by a RPL_MOTDSTART (before the RPL_MOTDs) and an
    RPL_ENDOFMOTD (after).
 
-*/final static String RPL_YOUREOPER = "381"; /* ":You are now an IRC operator"
+*/public final static String RPL_YOUREOPER = "381"; /* ":You are now an IRC operator"
  - RPL_YOUREOPER is sent back to a client which has
    just successfully issued an OPER message and gained
    operator status.
 
-*/final static String RPL_REHASHING = "382"; /* "<config file> :Rehashing"
+*/public final static String RPL_REHASHING = "382"; /* "<config file> :Rehashing"
  - If the REHASH option is used and an operator sends
    a REHASH message, an RPL_REHASHING is sent back to
    the operator.
 
-*/final static String RPL_YOURESERVICE = "383"; /* "You are service <servicename>"
+*/public final static String RPL_YOURESERVICE = "383"; /* "You are service <servicename>"
  - Sent by the server to a service upon successful
    registration.
 
-*/final static String RPL_TIME = "391"; /* "<server> :<string showing server's local time>"
+*/public final static String RPL_TIME = "391"; /* "<server> :<string showing server's local time>"
  - When replying to the TIME message, a server MUST send
    the reply using the RPL_TIME format above.  The string
    showing the time need only contain the correct day and
    time there.  There is no further requirement for the
    time string.
 
-*/final static String RPL_USERSSTART = "392"; /* ":UserID   Terminal  Host"
-*/final static String RPL_USERS = "393"; /* ":<username> <ttyline> <hostname>"
-*/final static String RPL_ENDOFUSERS = "394"; /* ":End of users"
-*/final static String RPL_NOUSERS = "395"; /* ":Nobody logged in"
+*/public final static String RPL_USERSSTART = "392"; /* ":UserID   Terminal  Host"
+*/public final static String RPL_USERS = "393"; /* ":<username> <ttyline> <hostname>"
+*/public final static String RPL_ENDOFUSERS = "394"; /* ":End of users"
+*/public final static String RPL_NOUSERS = "395"; /* ":Nobody logged in"
  - If the USERS message is handled by a server, the
    replies RPL_USERSTART, RPL_USERS, RPL_ENDOFUSERS and
    RPL_NOUSERS are used.  RPL_USERSSTART MUST be sent
@@ -217,19 +219,19 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
 
 
 
-*/final static String RPL_TRACELINK = "200"; /* "Link <version & debug level> <destination> <next server> V<protocol version> <link uptime in seconds> <backstream sendq> <upstream sendq>"
-*/final static String RPL_TRACECONNECTING = "201"; /* "Try. <class> <server>"
-*/final static String RPL_TRACEHANDSHAKE = "202"; /* "H.S. <class> <server>"
-*/final static String RPL_TRACEUNKNOWN = "203"; /* "???? <class> [<client IP address in dot form>]"
-*/final static String RPL_TRACEOPERATOR = "204"; /* "Oper <class> <nick>"
-*/final static String RPL_TRACEUSER = "205"; /* "User <class> <nick>"
-*/final static String RPL_TRACESERVER = "206"; /* "Serv <class> <int>S <int>C <server> <nick!user|*!*>@<host|server> V<protocol version>"
-*/final static String RPL_TRACESERVICE = "207"; /* "Service <class> <name> <type> <active type>"
-*/final static String RPL_TRACENEWTYPE = "208"; /* "<newtype> 0 <client name>"
-*/final static String RPL_TRACECLASS = "209"; /* "Class <class> <count>"
+*/public final static String RPL_TRACELINK = "200"; /* "Link <version & debug level> <destination> <next server> V<protocol version> <link uptime in seconds> <backstream sendq> <upstream sendq>"
+*/public final static String RPL_TRACECONNECTING = "201"; /* "Try. <class> <server>"
+*/public final static String RPL_TRACEHANDSHAKE = "202"; /* "H.S. <class> <server>"
+*/public final static String RPL_TRACEUNKNOWN = "203"; /* "???? <class> [<client IP address in dot form>]"
+*/public final static String RPL_TRACEOPERATOR = "204"; /* "Oper <class> <nick>"
+*/public final static String RPL_TRACEUSER = "205"; /* "User <class> <nick>"
+*/public final static String RPL_TRACESERVER = "206"; /* "Serv <class> <int>S <int>C <server> <nick!user|*!*>@<host|server> V<protocol version>"
+*/public final static String RPL_TRACESERVICE = "207"; /* "Service <class> <name> <type> <active type>"
+*/public final static String RPL_TRACENEWTYPE = "208"; /* "<newtype> 0 <client name>"
+*/public final static String RPL_TRACECLASS = "209"; /* "Class <class> <count>"
 //210 RPL_TRACERECONNECT Unused.
-*/final static String RPL_TRACELOG = "261"; /* "File <logfile> <debug level>"
-*/final static String RPL_TRACEEND = "262"; /* "<server name> <version & debug level> :End of TRACE"
+*/public final static String RPL_TRACELOG = "261"; /* "File <logfile> <debug level>"
+*/public final static String RPL_TRACEEND = "262"; /* "<server name> <version & debug level> :End of TRACE"
  - The RPL_TRACE* are all returned by the server in
    response to the TRACE message.  How many are
    returned is dependent on the TRACE message and
@@ -251,7 +253,7 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    being displayed anyway.
    RPL_TRACEEND is sent to indicate the end of the list.
 
-*/final static String RPL_STATSLINKINFO = "211"; /* "<linkname> <sendq> <sent messages> <sent Kbytes> <received messages> <received Kbytes> <time open>"
+*/public final static String RPL_STATSLINKINFO = "211"; /* "<linkname> <sendq> <sent messages> <sent Kbytes> <received messages> <received Kbytes> <time open>"
  - reports statistics on a connection.  <linkname>
    identifies the particular connection, <sendq> is
    the amount of data that is queued and waiting to be
@@ -263,23 +265,23 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    open> indicates how long ago the connection was
    opened, in seconds.
 
-*/final static String RPL_STATSCOMMANDS = "212"; /* "<command> <count> <byte count> <remote count>"
+*/public final static String RPL_STATSCOMMANDS = "212"; /* "<command> <count> <byte count> <remote count>"
  - reports statistics on commands usage.
 
-*/final static String RPL_ENDOFSTATS = "219"; /* "<stats letter> :End of STATS report"
-*/final static String RPL_STATSUPTIME = "242"; /* ":Server Up %d days %d:%02d:%02d"
+*/public final static String RPL_ENDOFSTATS = "219"; /* "<stats letter> :End of STATS report"
+*/public final static String RPL_STATSUPTIME = "242"; /* ":Server Up %d days %d:%02d:%02d"
  - reports the server uptime.
 
-*/final static String RPL_STATSOLINE = "243"; /* "O <hostmask> * <name>"
+*/public final static String RPL_STATSOLINE = "243"; /* "O <hostmask> * <name>"
  - reports the allowed hosts from where user may become IRC
    operators.
 
-*/final static String RPL_UMODEIS = "221"; /* "<user mode string>"
+*/public final static String RPL_UMODEIS = "221"; /* "<user mode string>"
  - To answer a query about a client's own mode,
    RPL_UMODEIS is sent back.
 
-*/final static String RPL_SERVLIST = "234"; /* "<name> <server> <mask> <type> <hopcount> <info>"
-*/final static String RPL_SERVLISTEND = "235"; /* "<mask> <type> :End of service listing"
+*/public final static String RPL_SERVLIST = "234"; /* "<name> <server> <mask> <type> <hopcount> <info>"
+*/public final static String RPL_SERVLISTEND = "235"; /* "<mask> <type> :End of service listing"
  - When listing services in reply to a SERVLIST message,
    a server is required to send the list back using the
    RPL_SERVLIST and RPL_SERVLISTEND messages.  A separate
@@ -287,11 +289,11 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    services have been listed (or if none present) a
    RPL_SERVLISTEND MUST be sent.
 
-*/final static String RPL_LUSERCLIENT = "251"; /* ":There are <integer> users and <integer> services on <integer> servers"
-*/final static String RPL_LUSEROP = "252"; /* "<integer> :operator(s) online"
-*/final static String RPL_LUSERUNKNOWN = "253"; /* "<integer> :unknown connection(s)"
-*/final static String RPL_LUSERCHANNELS = "254"; /* "<integer> :channels formed"
-*/final static String RPL_LUSERME = "255"; /* ":I have <integer> clients and <integer> servers"
+*/public final static String RPL_LUSERCLIENT = "251"; /* ":There are <integer> users and <integer> services on <integer> servers"
+*/public final static String RPL_LUSEROP = "252"; /* "<integer> :operator(s) online"
+*/public final static String RPL_LUSERUNKNOWN = "253"; /* "<integer> :unknown connection(s)"
+*/public final static String RPL_LUSERCHANNELS = "254"; /* "<integer> :channels formed"
+*/public final static String RPL_LUSERME = "255"; /* ":I have <integer> clients and <integer> servers"
  - In processing an LUSERS message, the server
    sends a set of replies from RPL_LUSERCLIENT,
    RPL_LUSEROP, RPL_USERUNKNOWN,
@@ -301,10 +303,10 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    replies are only sent back if a non-zero count
    is found for them.
 
-*/final static String RPL_ADMINME = "256"; /* "<server> :Administrative info"
-*/final static String RPL_ADMINLOC1 = "257"; /* ":<admin info>"
-*/final static String RPL_ADMINLOC2 = "258"; /* ":<admin info>"
-*/final static String RPL_ADMINEMAIL = "259"; /* ":<admin info>"
+*/public final static String RPL_ADMINME = "256"; /* "<server> :Administrative info"
+*/public final static String RPL_ADMINLOC1 = "257"; /* ":<admin info>"
+*/public final static String RPL_ADMINLOC2 = "258"; /* ":<admin info>"
+*/public final static String RPL_ADMINEMAIL = "259"; /* ":<admin info>"
  - When replying to an ADMIN message, a server
    is expected to use replies RPL_ADMINME
    through to RPL_ADMINEMAIL and provide a text
@@ -316,7 +318,7 @@ final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Relay Netwo
    server (an email address here is REQUIRED)
    in RPL_ADMINEMAIL.
 
-*/final static String RPL_TRYAGAIN = "263"; /* "<command> :Please wait a while and try again."
+*/public final static String RPL_TRYAGAIN = "263"; /* "<command> :Please wait a while and try again."
  - When a server drops a command without processing it,
    it MUST use the reply RPL_TRYAGAIN to inform the
    originating client.
@@ -325,25 +327,25 @@ Error Replies
 
 Error replies are found in the range from 400 to 599.
 
-*/final static String ERR_NOSUCHNICK = "401"; /* "<nickname> :No such nick/channel"
+*/public final static String ERR_NOSUCHNICK = "401"; /* "<nickname> :No such nick/channel"
   - Used to indicate the nickname parameter supplied to a
 	command is currently unused.
 
-*/final static String ERR_NOSUCHSERVER = "402"; /* "<server name> :No such server"
+*/public final static String ERR_NOSUCHSERVER = "402"; /* "<server name> :No such server"
  - Used to indicate the server name given currently
    does not exist.
 
-*/final static String ERR_NOSUCHCHANNEL = "403"; /* "<channel name> :No such channel"
+*/public final static String ERR_NOSUCHCHANNEL = "403"; /* "<channel name> :No such channel"
  - Used to indicate the given channel name is invalid.
 
-*/final static String ERR_CANNOTSENDTOCHAN = "404"; /* "<channel name> :Cannot send to channel"
+*/public final static String ERR_CANNOTSENDTOCHAN = "404"; /* "<channel name> :Cannot send to channel"
  - Sent to a user who is either (a) not on a channel
    which is mode +n or (b) not a chanop (or mode +v) on
    a channel which has mode +m set or where the user is
    banned and is trying to send a PRIVMSG message to
    that channel.
 
-*/final static String ERR_TOOMANYCHANNELS = "405"; /*
+*/public final static String ERR_TOOMANYCHANNELS = "405"; /*
 	  "<channel name> :You have joined too many channels"
 
  - Sent to a user when they have joined the maximum
@@ -358,13 +360,13 @@ Kalt                         Informational                     [Page 53]
 RFC 2812          Internet Relay Chat: Client Protocol        April 2000
 
 
-*/final static String ERR_WASNOSUCHNICK = "406"; /*
+*/public final static String ERR_WASNOSUCHNICK = "406"; /*
 	  "<nickname> :There was no such nickname"
 
  - Returned by WHOWAS to indicate there is no history
    information for that nickname.
 
-*/final static String ERR_TOOMANYTARGETS = "407"; /*
+*/public final static String ERR_TOOMANYTARGETS = "407"; /*
 	  "<target> :<error code> recipients. <abort message>"
 
  - Returned to a client which is attempting to send a
@@ -378,26 +380,26 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    channel using the shortname when there are more than one
    such channel.
 
-*/final static String ERR_NOSUCHSERVICE = "408"; /*
+*/public final static String ERR_NOSUCHSERVICE = "408"; /*
 	  "<service name> :No such service"
 
  - Returned to a client which is attempting to send a SQUERY
    to a service which does not exist.
 
-*/final static String ERR_NOORIGIN = "409"; /*
+*/public final static String ERR_NOORIGIN = "409"; /*
 	  ":No origin specified"
 
  - PING or PONG message missing the originator parameter.
 
-*/final static String ERR_NORECIPIENT = "411"; /*
+*/public final static String ERR_NORECIPIENT = "411"; /*
 	  ":No recipient given (<command>)"
-*/final static String ERR_NOTEXTTOSEND = "412"; /*
+*/public final static String ERR_NOTEXTTOSEND = "412"; /*
 	  ":No text to send"
-*/final static String ERR_NOTOPLEVEL = "413"; /*
+*/public final static String ERR_NOTOPLEVEL = "413"; /*
 	  "<mask> :No toplevel domain specified"
-*/final static String ERR_WILDTOPLEVEL = "414"; /*
+*/public final static String ERR_WILDTOPLEVEL = "414"; /*
 	  "<mask> :Wildcard in toplevel domain"
-*/final static String ERR_BADMASK = "415"; /*
+*/public final static String ERR_BADMASK = "415"; /*
 	  "<mask> :Bad Server/host mask"
 
  - 412 - 415 are returned by PRIVMSG to indicate that
@@ -414,44 +416,44 @@ Kalt                         Informational                     [Page 54]
 RFC 2812          Internet Relay Chat: Client Protocol        April 2000
 
 
-*/final static String ERR_UNKNOWNCOMMAND = "421"; /*
+*/public final static String ERR_UNKNOWNCOMMAND = "421"; /*
 	  "<command> :Unknown command"
 
  - Returned to a registered client to indicate that the
    command sent is unknown by the server.
 
-*/final static String ERR_NOMOTD = "422"; /*
+*/public final static String ERR_NOMOTD = "422"; /*
 	  ":MOTD File is missing"
 
  - Server's MOTD file could not be opened by the server.
 
-*/final static String ERR_NOADMININFO = "423"; /*
+*/public final static String ERR_NOADMININFO = "423"; /*
 	  "<server> :No administrative info available"
 
  - Returned by a server in response to an ADMIN message
    when there is an error in finding the appropriate
    information.
 
-*/final static String ERR_FILEERROR = "424"; /*
+*/public final static String ERR_FILEERROR = "424"; /*
 	  ":File error doing <file op> on <file>"
 
  - Generic error message used to report a failed file
    operation during the processing of a message.
 
-*/final static String ERR_NONICKNAMEGIVEN = "431"; /*
+*/public final static String ERR_NONICKNAMEGIVEN = "431"; /*
 	  ":No nickname given"
 
  - Returned when a nickname parameter expected for a
    command and isn't found.
 
-*/final static String ERR_ERRONEUSNICKNAME = "432"; /*
+*/public final static String ERR_ERRONEUSNICKNAME = "432"; /*
 	  "<nick> :Erroneous nickname"
 
  - Returned after receiving a NICK message which contains
    characters which do not fall in the defined set.  See
    section 2.3.1 for details on valid nicknames.
 
-*/final static String ERR_NICKNAMEINUSE = "433"; /*
+*/public final static String ERR_NICKNAMEINUSE = "433"; /*
 	  "<nick> :Nickname is already in use"
 
  - Returned when a NICK message is processed that results
@@ -470,14 +472,14 @@ Kalt                         Informational                     [Page 55]
 RFC 2812          Internet Relay Chat: Client Protocol        April 2000
 
 
-*/final static String ERR_NICKCOLLISION = "436"; /*
+*/public final static String ERR_NICKCOLLISION = "436"; /*
 	  "<nick> :Nickname collision KILL from <user>@<host>"
 
  - Returned by a server to a client when it detects a
    nickname collision (registered of a NICK that
    already exists by another server).
 
-*/final static String ERR_UNAVAILRESOURCE = "437"; /*
+*/public final static String ERR_UNAVAILRESOURCE = "437"; /*
 	  "<nick/channel> :Nick/channel is temporarily unavailable"
 
  - Returned by a server to a user trying to join a channel
@@ -487,26 +489,26 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    when the desired nickname is blocked by the nick delay
    mechanism.
 
-*/final static String ERR_USERNOTINCHANNEL = "441"; /*
+*/public final static String ERR_USERNOTINCHANNEL = "441"; /*
 	  "<nick> <channel> :They aren't on that channel"
 
  - Returned by the server to indicate that the target
    user of the command is not on the given channel.
 
-*/final static String ERR_NOTONCHANNEL = "442"; /*
+*/public final static String ERR_NOTONCHANNEL = "442"; /*
 	  "<channel> :You're not on that channel"
 
  - Returned by the server whenever a client tries to
    perform a channel affecting command for which the
    client isn't a member.
 
-*/final static String ERR_USERONCHANNEL = "443"; /*
+*/public final static String ERR_USERONCHANNEL = "443"; /*
 	  "<user> <channel> :is already on channel"
 
  - Returned when a client tries to invite a user to a
    channel they are already on.
 
-*/final static String ERR_NOLOGIN = "444"; /*
+*/public final static String ERR_NOLOGIN = "444"; /*
 	  "<user> :User not logged in"
 
  - Returned by the summon after a SUMMON command for a
@@ -526,40 +528,40 @@ Kalt                         Informational                     [Page 56]
 RFC 2812          Internet Relay Chat: Client Protocol        April 2000
 
 
-*/final static String ERR_SUMMONDISABLED = "445"; /*
+*/public final static String ERR_SUMMONDISABLED = "445"; /*
 	  ":SUMMON has been disabled"
 
  - Returned as a response to the SUMMON command.  MUST be
    returned by any server which doesn't implement it.
 
-*/final static String ERR_USERSDISABLED = "446"; /*
+*/public final static String ERR_USERSDISABLED = "446"; /*
 	  ":USERS has been disabled"
 
  - Returned as a response to the USERS command.  MUST be
    returned by any server which does not implement it.
 
-*/final static String ERR_NOTREGISTERED = "451"; /*
+*/public final static String ERR_NOTREGISTERED = "451"; /*
 	  ":You have not registered"
 
  - Returned by the server to indicate that the client
    MUST be registered before the server will allow it
    to be parsed in detail.
 
-*/final static String ERR_NEEDMOREPARAMS = "461"; /*
+*/public final static String ERR_NEEDMOREPARAMS = "461"; /*
 	  "<command> :Not enough parameters"
 
  - Returned by the server by numerous commands to
    indicate to the client that it didn't supply enough
    parameters.
 
-*/final static String ERR_ALREADYREGISTRED = "462"; /*
+*/public final static String ERR_ALREADYREGISTRED = "462"; /*
 	  ":Unauthorized command (already registered)"
 
  - Returned by the server to any link which tries to
    change part of the registered details (such as
    password or user details from second USER message).
 
-*/final static String ERR_NOPERMFORHOST = "463"; /*
+*/public final static String ERR_NOPERMFORHOST = "463"; /*
 	  ":Your host isn't among the privileged"
 
  - Returned to a client which attempts to register with
@@ -567,7 +569,7 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    connections from the host the attempted connection
    is tried.
 
-*/final static String ERR_PASSWDMISMATCH = "464"; /*
+*/public final static String ERR_PASSWDMISMATCH = "464"; /*
 	  ":Password incorrect"
 
  - Returned to indicate a failed attempt at registering
@@ -582,45 +584,45 @@ Kalt                         Informational                     [Page 57]
 RFC 2812          Internet Relay Chat: Client Protocol        April 2000
 
 
-*/final static String ERR_YOUREBANNEDCREEP = "465"; /*
+*/public final static String ERR_YOUREBANNEDCREEP = "465"; /*
 	  ":You are banned from this server"
 
  - Returned after an attempt to connect and register
    yourself with a server which has been setup to
    explicitly deny connections to you.
 
-*/final static String ERR_YOUWILLBEBANNED = "466"; /*
+*/public final static String ERR_YOUWILLBEBANNED = "466"; /*
 
  - Sent by a server to a user to inform that access to the
    server will soon be denied.
 
-*/final static String ERR_KEYSET = "467"; /*
+*/public final static String ERR_KEYSET = "467"; /*
 	  "<channel> :Channel key already set"
-*/final static String ERR_CHANNELISFULL = "471"; /*
+*/public final static String ERR_CHANNELISFULL = "471"; /*
 	  "<channel> :Cannot join channel (+l)"
-*/final static String ERR_UNKNOWNMODE = "472"; /*
+*/public final static String ERR_UNKNOWNMODE = "472"; /*
 	  "<char> :is unknown mode char to me for <channel>"
-*/final static String ERR_INVITEONLYCHAN = "473"; /*
+*/public final static String ERR_INVITEONLYCHAN = "473"; /*
 	  "<channel> :Cannot join channel (+i)"
-*/final static String ERR_BANNEDFROMCHAN = "474"; /*
+*/public final static String ERR_BANNEDFROMCHAN = "474"; /*
 	  "<channel> :Cannot join channel (+b)"
-*/final static String ERR_BADCHANNELKEY = "475"; /*
+*/public final static String ERR_BADCHANNELKEY = "475"; /*
 	  "<channel> :Cannot join channel (+k)"
-*/final static String ERR_BADCHANMASK = "476"; /*
+*/public final static String ERR_BADCHANMASK = "476"; /*
 	  "<channel> :Bad Channel Mask"
-*/final static String ERR_NOCHANMODES = "477"; /*
+*/public final static String ERR_NOCHANMODES = "477"; /*
 	  "<channel> :Channel doesn't support modes"
-*/final static String ERR_BANLISTFULL = "478"; /*
+*/public final static String ERR_BANLISTFULL = "478"; /*
 	  "<channel> <char> :Channel list is full"
 
-*/final static String ERR_NOPRIVILEGES = "481"; /*
+*/public final static String ERR_NOPRIVILEGES = "481"; /*
 	  ":Permission Denied- You're not an IRC operator"
 
  - Any command requiring operator privileges to operate
    MUST return this error to indicate the attempt was
    unsuccessful.
 
-*/final static String ERR_CHANOPRIVSNEEDED = "482"; /*
+*/public final static String ERR_CHANOPRIVSNEEDED = "482"; /*
 	  "<channel> :You're not channel operator"
 
  - Any command requiring 'chanop' privileges (such as
@@ -638,27 +640,27 @@ Kalt                         Informational                     [Page 58]
 RFC 2812          Internet Relay Chat: Client Protocol        April 2000
 
 
-*/final static String ERR_CANTKILLSERVER = "483"; /*
+*/public final static String ERR_CANTKILLSERVER = "483"; /*
 	  ":You can't kill a server!"
 
  - Any attempts to use the KILL command on a server
    are to be refused and this error returned directly
    to the client.
 
-*/final static String ERR_RESTRICTED = "484"; /*
+*/public final static String ERR_RESTRICTED = "484"; /*
 	  ":Your connection is restricted!"
 
  - Sent by the server to a user upon connection to indicate
    the restricted nature of the connection (user mode "+r").
 
-*/final static String ERR_UNIQOPPRIVSNEEDED = "485"; /*
+*/public final static String ERR_UNIQOPPRIVSNEEDED = "485"; /*
 	  ":You're not the original channel operator"
 
  - Any MODE requiring "channel creator" privileges MUST
    return this error if the client making the attempt is not
    a chanop on the specified channel.
 
-*/final static String ERR_NOOPERHOST = "491"; /*
+*/public final static String ERR_NOOPERHOST = "491"; /*
 	  ":No O-lines for your host"
 
  - If a client sends an OPER message and the server has
@@ -666,14 +668,14 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    client's host as an operator, this error MUST be
    returned.
 
-*/final static String ERR_UMODEUNKNOWNFLAG = "501"; /*
+*/public final static String ERR_UMODEUNKNOWNFLAG = "501"; /*
 	  ":Unknown MODE flag"
 
  - Returned by the server to indicate that a MODE
    message was sent with a nickname parameter and that
    the a mode flag sent was not recognized.
 
-*/final static String ERR_USERSDONTMATCH = "502"; /*
+*/public final static String ERR_USERSDONTMATCH = "502"; /*
 	  ":Cannot change mode for other users"
 
  - Error sent to any user trying to view or change the
