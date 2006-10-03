@@ -26,6 +26,8 @@ public class Arpobot
 		int i;
 		String sendernick;
 
+
+		//HttpClient http = new HttpClient(); skal moskrives
 		IrcClient bot =  new IrcClient(server , port);
 		//bot.setServer(server , port);
 		bot.connect();
@@ -40,7 +42,7 @@ public class Arpobot
 			String cmdName = cmd.commandName;
 			if (cmdName.equals(IrcNumerics.RPL_MOTD))
 				continue; //ignore the MOTD for now
-		
+
 			System.out.println("--> "+cmd.fullCommand);
 			/*System.out.println("kommando: "+cmd.getCommandName());
 			System.out.println("nick el. server: "+cmd.getNickOrServer());
@@ -52,7 +54,7 @@ public class Arpobot
 				System.out.println("parameter: "+s);
 			}
 			System.out.println();*/
-			
+
 			if (cmdName.equals("NOTICE") && (((MsgCommand)cmd).receiver.equals("AUTH")) && (((MsgCommand)cmd).message.equals("*** Checking Ident")))
 			{
 				// Set nick and username
@@ -70,7 +72,6 @@ public class Arpobot
 			}
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
-				
 				bot.join(kanal);
 				bot.msg("Q@CServe.quakenet.org", "AUTH ArvoXbot QtD6JXt8");
 			}

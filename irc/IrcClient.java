@@ -64,7 +64,24 @@ public class IrcClient
 		commando = "PART " + channel + "\r\n";
 		execute(commando, LogLevel.CHAN);
 	}
-// mode skal vaere her
+	public void mode (String channel, String mode) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "MODE " + channel + " " + mode + "\r\n";
+		execute(commando, LogLevel.CHAN);
+	}
+	public void mode (String channel, String mode, int limet) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "MODE " + channel + " " + mode + " " + limet + "\r\n";
+		execute(commando, LogLevel.CHAN);
+	}
+	public void mode (String channel, String mode, String userOrMaskOrPass) throws Exception
+	{
+		channel = checkChannel(channel);
+		commando = "MODE " + channel + " " + mode + " " + userOrMaskOrPass + "\r\n";
+		execute(commando, LogLevel.CHAN);
+	}
 	public void topic (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
@@ -166,13 +183,16 @@ skal vaere her*/
 		this.skriv = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
 		this.laes = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 	}
-
-	public IrcClient (String server,int port)
+	public void disconnect() throws Exception
+	{
+		this.socket.close();
+	}
+	public IrcClient (String server)
 	{
 		this.server = server;
 		this.port = 6667;
 	}
-	public IrcClient (String server)
+	public IrcClient (String server,int port)
 	{
 		this.server = server;
 		this.port = port;
@@ -193,12 +213,12 @@ skal vaere her*/
 	{
 		return this.laes.readLine();
 	}
-	
+
 	public IrcCommand getCommand() throws Throwable
 	{
 		return IrcCommand.parse(getLine());
 	}
-	
+
 	private String checkChannel(String channel)
 	{
 		if (!channel.startsWith("#"))
