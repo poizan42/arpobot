@@ -1,6 +1,6 @@
 import irc.*;
 import irc.command.*;
-import http.HttpClient;
+
 public class Arpobot
 {
 	final static String server = "dk.quakenet.org";
@@ -8,12 +8,12 @@ public class Arpobot
 
 	final static String username = "Arpobot";
 	final static String realname = "Arpobot";
-	final static String nick1 = "Arpobot-ip";
-	final static String nick2 = "Arpobot-ip2";
+	final static String nick1 = "Arpobot";
+	final static String nick2 = "Arpobot2";
 	final static String kanal = "#ArvoX";
 	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot fra dnttah -- http://word.arvox.dk :)";
 
-	final static String version = "svn $Revision$ $Date$";
+	final static String version = "svn $Revision: 51 $ $Date: 2006-10-03 22:19:56 +0200 (ti, 03 okt 2006) $";
 
 	public static void main(String[] args) throws Throwable
 	{
