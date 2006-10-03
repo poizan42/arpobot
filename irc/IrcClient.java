@@ -2,6 +2,7 @@ package irc;
 
 import java.io.*;
 import java.net.*;
+import irc.command.*;
 
 public class IrcClient
 {
@@ -129,7 +130,7 @@ skal vaere her*/
 skal vaere her*/
 	public void pong (String daemon) throws Exception
 	{
-		commando = "PONG " + daemon.substring(5)+ "\r\n";
+		commando = "PONG :" + daemon + "\r\n";
 		execute(commando, LogLevel.DEBUG);
 	}
 /*away
@@ -192,7 +193,12 @@ skal vaere her*/
 	{
 		return this.laes.readLine();
 	}
-
+	
+	public IrcCommand getCommand() throws Throwable
+	{
+		return IrcCommand.parse(getLine());
+	}
+	
 	private String checkChannel(String channel)
 	{
 		if (!channel.startsWith("#"))
