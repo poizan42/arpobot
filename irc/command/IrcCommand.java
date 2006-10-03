@@ -5,54 +5,21 @@ import java.util.*;
 
 public class IrcCommand
 {
-	private static HashMap<String, Class<IrcCommand>> commands = new HashMap<String, Class<IrcCommand>>();
+	private static HashMap<String, Class> commands = new HashMap<String, Class>();
 	
-	private String fullCommand, commandName, nickOrServer = "", user = "", host = "", paramsStr;
-	private String[] parameters;
+	public String fullCommand, commandName, nickOrServer = "", user = "", host = "", paramsStr;
+	public String[] parameters;
 
 	//Skal kaldes i en static blok i alle underklasser der tilhoerer en eller flere bestemte kommandoer
-	public static void AddCommand(Class<IrcCommand> cmd, String name)
+	public static void AddCommand(Class cmd, String name)
 	{
 		commands.put(name, cmd);
 	}
 	
 	static {
 		AddCommand(IrcCommand.class, "PING");
-	}
-	
-	public String getCommandName()
-	{
-		return commandName;
-	}
-	
-	public String getFullCommand()
-	{
-		return fullCommand;
-	}
-
-	public String getNickOrServer()
-	{
-		return nickOrServer;
-	}
-	
-	public String getUser()
-	{
-		return user;
-	}
-	
-	public String getHost()
-	{
-		return host;
-	}
-	
-	public String getParamsStr()
-	{
-		return paramsStr;
-	}
-	
-	public String[] getParameters()
-	{
-		return parameters;
+		AddCommand(MsgCommand.class, "NOTICE");
+		AddCommand(MsgCommand.class, "PRIVMSG");
 	}
 	
 	public String toString()
@@ -131,15 +98,16 @@ public class IrcCommand
 		}
 		
 		//laver en instans af den rigtige klasse
-		Class<IrcCommand> commandClass = commands.get(commandName);
+		Class commandClass = commands.get(commandName);
 		if (commandClass == null) //der er ikke registreret nogen klasse
 			return new IrcCommand(cmdstr, commandName, prefixInf, params);
+		
 		//finder konstruktoren
 		//String pFullCommand, String command, String[] prefix, String params
 		try
 		{
-			Constructor<IrcCommand> constructor = commandClass.getConstructor(String.class, String.class, String[].class, String.class);
-			return constructor.newInstance(fullCommand, commandName, prefixInf, params);
+			Constructor constructor = commandClass.getConstructor(String.class, String.class, String[].class, String.class);
+			return (IrcCommand)constructor.newInstance(fullCommand, commandName, prefixInf, params);
 		}
 		catch (InvocationTargetException e)
 		{ 
