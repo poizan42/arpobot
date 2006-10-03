@@ -18,9 +18,6 @@ public final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Rela
 
 */public final static String RPL_BOUNCE = "005"; /* "Try server <server name>, port <port number>" //??
 
-
-
-
 */public final static String RPL_USERHOST = "302"; /* ":*1<reply> *( " " <reply> )"
 
  - Reply format used by USERHOST to list replies to
@@ -217,8 +214,6 @@ public final static String RPL_WELCOME = "001"; /* "Welcome to the Internet Rela
    or a single RPL_NOUSER.  Following this is
    RPL_ENDOFUSERS.
 
-
-
 */public final static String RPL_TRACELINK = "200"; /* "Link <version & debug level> <destination> <next server> V<protocol version> <link uptime in seconds> <backstream sendq> <upstream sendq>"
 */public final static String RPL_TRACECONNECTING = "201"; /* "Try. <class> <server>"
 */public final static String RPL_TRACEHANDSHAKE = "202"; /* "H.S. <class> <server>"
@@ -345,29 +340,18 @@ Error replies are found in the range from 400 to 599.
    banned and is trying to send a PRIVMSG message to
    that channel.
 
-*/public final static String ERR_TOOMANYCHANNELS = "405"; /*
-	  "<channel name> :You have joined too many channels"
+*/public final static String ERR_TOOMANYCHANNELS = "405"; /* "<channel name> :You have joined too many channels"
 
  - Sent to a user when they have joined the maximum
    number of allowed channels and they try to join
    another channel.
 
-
-
-
-Kalt                         Informational                     [Page 53]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
-*/public final static String ERR_WASNOSUCHNICK = "406"; /*
-	  "<nickname> :There was no such nickname"
+*/public final static String ERR_WASNOSUCHNICK = "406"; /* "<nickname> :There was no such nickname"
 
  - Returned by WHOWAS to indicate there is no history
    information for that nickname.
 
-*/public final static String ERR_TOOMANYTARGETS = "407"; /*
-	  "<target> :<error code> recipients. <abort message>"
+*/public final static String ERR_TOOMANYTARGETS = "407"; /* "<target> :<error code> recipients. <abort message>"
 
  - Returned to a client which is attempting to send a
    PRIVMSG/NOTICE using the user@host destination format
@@ -380,27 +364,20 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    channel using the shortname when there are more than one
    such channel.
 
-*/public final static String ERR_NOSUCHSERVICE = "408"; /*
-	  "<service name> :No such service"
+*/public final static String ERR_NOSUCHSERVICE = "408"; /* "<service name> :No such service"
 
  - Returned to a client which is attempting to send a SQUERY
    to a service which does not exist.
 
-*/public final static String ERR_NOORIGIN = "409"; /*
-	  ":No origin specified"
+*/public final static String ERR_NOORIGIN = "409"; /* ":No origin specified"
 
  - PING or PONG message missing the originator parameter.
 
-*/public final static String ERR_NORECIPIENT = "411"; /*
-	  ":No recipient given (<command>)"
-*/public final static String ERR_NOTEXTTOSEND = "412"; /*
-	  ":No text to send"
-*/public final static String ERR_NOTOPLEVEL = "413"; /*
-	  "<mask> :No toplevel domain specified"
-*/public final static String ERR_WILDTOPLEVEL = "414"; /*
-	  "<mask> :Wildcard in toplevel domain"
-*/public final static String ERR_BADMASK = "415"; /*
-	  "<mask> :Bad Server/host mask"
+*/public final static String ERR_NORECIPIENT = "411"; /* ":No recipient given (<command>)"
+*/public final static String ERR_NOTEXTTOSEND = "412"; /* ":No text to send"
+*/public final static String ERR_NOTOPLEVEL = "413"; /* "<mask> :No toplevel domain specified"
+*/public final static String ERR_WILDTOPLEVEL = "414"; /* "<mask> :Wildcard in toplevel domain"
+*/public final static String ERR_BADMASK = "415"; /* "<mask> :Bad Server/host mask"
 
  - 412 - 415 are returned by PRIVMSG to indicate that
    the message wasn't delivered for some reason.
@@ -408,79 +385,50 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    are returned when an invalid use of
    "PRIVMSG $<server>" or "PRIVMSG #<host>" is attempted.
 
-
-
-
-Kalt                         Informational                     [Page 54]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
-*/public final static String ERR_UNKNOWNCOMMAND = "421"; /*
-	  "<command> :Unknown command"
+*/public final static String ERR_UNKNOWNCOMMAND = "421"; /* "<command> :Unknown command"
 
  - Returned to a registered client to indicate that the
    command sent is unknown by the server.
 
-*/public final static String ERR_NOMOTD = "422"; /*
-	  ":MOTD File is missing"
+*/public final static String ERR_NOMOTD = "422"; /* ":MOTD File is missing"
 
  - Server's MOTD file could not be opened by the server.
 
-*/public final static String ERR_NOADMININFO = "423"; /*
-	  "<server> :No administrative info available"
+*/public final static String ERR_NOADMININFO = "423"; /* "<server> :No administrative info available"
 
  - Returned by a server in response to an ADMIN message
    when there is an error in finding the appropriate
    information.
 
-*/public final static String ERR_FILEERROR = "424"; /*
-	  ":File error doing <file op> on <file>"
+*/public final static String ERR_FILEERROR = "424"; /* ":File error doing <file op> on <file>"
 
  - Generic error message used to report a failed file
    operation during the processing of a message.
 
-*/public final static String ERR_NONICKNAMEGIVEN = "431"; /*
-	  ":No nickname given"
+*/public final static String ERR_NONICKNAMEGIVEN = "431"; /* ":No nickname given"
 
  - Returned when a nickname parameter expected for a
    command and isn't found.
 
-*/public final static String ERR_ERRONEUSNICKNAME = "432"; /*
-	  "<nick> :Erroneous nickname"
+*/public final static String ERR_ERRONEUSNICKNAME = "432"; /* "<nick> :Erroneous nickname"
 
  - Returned after receiving a NICK message which contains
    characters which do not fall in the defined set.  See
    section 2.3.1 for details on valid nicknames.
 
-*/public final static String ERR_NICKNAMEINUSE = "433"; /*
-	  "<nick> :Nickname is already in use"
+*/public final static String ERR_NICKNAMEINUSE = "433"; /* "<nick> :Nickname is already in use"
 
  - Returned when a NICK message is processed that results
    in an attempt to change to a currently existing
    nickname.
 
-
-
-
-
-
-
-
-Kalt                         Informational                     [Page 55]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
-*/public final static String ERR_NICKCOLLISION = "436"; /*
-	  "<nick> :Nickname collision KILL from <user>@<host>"
+*/public final static String ERR_NICKCOLLISION = "436"; /* "<nick> :Nickname collision KILL from <user>@<host>"
 
  - Returned by a server to a client when it detects a
    nickname collision (registered of a NICK that
    already exists by another server).
 
-*/public final static String ERR_UNAVAILRESOURCE = "437"; /*
-	  "<nick/channel> :Nick/channel is temporarily unavailable"
+*/public final static String ERR_UNAVAILRESOURCE = "437"; /* "<nick/channel> :Nick/channel is temporarily unavailable"
 
  - Returned by a server to a user trying to join a channel
    currently blocked by the channel delay mechanism.
@@ -489,103 +437,70 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
    when the desired nickname is blocked by the nick delay
    mechanism.
 
-*/public final static String ERR_USERNOTINCHANNEL = "441"; /*
-	  "<nick> <channel> :They aren't on that channel"
+*/public final static String ERR_USERNOTINCHANNEL = "441"; /* "<nick> <channel> :They aren't on that channel"
 
  - Returned by the server to indicate that the target
    user of the command is not on the given channel.
 
-*/public final static String ERR_NOTONCHANNEL = "442"; /*
-	  "<channel> :You're not on that channel"
+*/public final static String ERR_NOTONCHANNEL = "442"; /* "<channel> :You're not on that channel"
 
  - Returned by the server whenever a client tries to
    perform a channel affecting command for which the
    client isn't a member.
 
-*/public final static String ERR_USERONCHANNEL = "443"; /*
-	  "<user> <channel> :is already on channel"
+*/public final static String ERR_USERONCHANNEL = "443"; /* "<user> <channel> :is already on channel"
 
  - Returned when a client tries to invite a user to a
    channel they are already on.
 
-*/public final static String ERR_NOLOGIN = "444"; /*
-	  "<user> :User not logged in"
+*/public final static String ERR_NOLOGIN = "444"; /* "<user> :User not logged in"
 
  - Returned by the summon after a SUMMON command for a
    user was unable to be performed since they were not
    logged in.
 
-
-
-
-
-
-
-
-
-Kalt                         Informational                     [Page 56]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
-*/public final static String ERR_SUMMONDISABLED = "445"; /*
-	  ":SUMMON has been disabled"
+*/public final static String ERR_SUMMONDISABLED = "445"; /* ":SUMMON has been disabled"
 
  - Returned as a response to the SUMMON command.  MUST be
    returned by any server which doesn't implement it.
 
-*/public final static String ERR_USERSDISABLED = "446"; /*
-	  ":USERS has been disabled"
+*/public final static String ERR_USERSDISABLED = "446"; /* ":USERS has been disabled"
 
  - Returned as a response to the USERS command.  MUST be
    returned by any server which does not implement it.
 
-*/public final static String ERR_NOTREGISTERED = "451"; /*
-	  ":You have not registered"
+*/public final static String ERR_NOTREGISTERED = "451"; /* ":You have not registered"
 
  - Returned by the server to indicate that the client
    MUST be registered before the server will allow it
    to be parsed in detail.
 
-*/public final static String ERR_NEEDMOREPARAMS = "461"; /*
-	  "<command> :Not enough parameters"
+*/public final static String ERR_NEEDMOREPARAMS = "461"; /* "<command> :Not enough parameters"
 
  - Returned by the server by numerous commands to
    indicate to the client that it didn't supply enough
    parameters.
 
-*/public final static String ERR_ALREADYREGISTRED = "462"; /*
-	  ":Unauthorized command (already registered)"
+*/public final static String ERR_ALREADYREGISTRED = "462"; /* ":Unauthorized command (already registered)"
 
  - Returned by the server to any link which tries to
    change part of the registered details (such as
    password or user details from second USER message).
 
-*/public final static String ERR_NOPERMFORHOST = "463"; /*
-	  ":Your host isn't among the privileged"
+*/public final static String ERR_NOPERMFORHOST = "463"; /* ":Your host isn't among the privileged"
 
  - Returned to a client which attempts to register with
    a server which does not been setup to allow
    connections from the host the attempted connection
    is tried.
 
-*/public final static String ERR_PASSWDMISMATCH = "464"; /*
-	  ":Password incorrect"
+*/public final static String ERR_PASSWDMISMATCH = "464"; /* ":Password incorrect"
 
  - Returned to indicate a failed attempt at registering
    a connection for which a password was required and
    was either not given or incorrect.
 
-
-
-
-Kalt                         Informational                     [Page 57]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
-*/public final static String ERR_YOUREBANNEDCREEP = "465"; /*
-	  ":You are banned from this server"
+*/public final static String ERR_YOUREBANNEDCREEP = "465"; /* ":You are banned from this server"
 
  - Returned after an attempt to connect and register
    yourself with a server which has been setup to
@@ -596,87 +511,59 @@ RFC 2812          Internet Relay Chat: Client Protocol        April 2000
  - Sent by a server to a user to inform that access to the
    server will soon be denied.
 
-*/public final static String ERR_KEYSET = "467"; /*
-	  "<channel> :Channel key already set"
-*/public final static String ERR_CHANNELISFULL = "471"; /*
-	  "<channel> :Cannot join channel (+l)"
-*/public final static String ERR_UNKNOWNMODE = "472"; /*
-	  "<char> :is unknown mode char to me for <channel>"
-*/public final static String ERR_INVITEONLYCHAN = "473"; /*
-	  "<channel> :Cannot join channel (+i)"
-*/public final static String ERR_BANNEDFROMCHAN = "474"; /*
-	  "<channel> :Cannot join channel (+b)"
-*/public final static String ERR_BADCHANNELKEY = "475"; /*
-	  "<channel> :Cannot join channel (+k)"
-*/public final static String ERR_BADCHANMASK = "476"; /*
-	  "<channel> :Bad Channel Mask"
-*/public final static String ERR_NOCHANMODES = "477"; /*
-	  "<channel> :Channel doesn't support modes"
-*/public final static String ERR_BANLISTFULL = "478"; /*
-	  "<channel> <char> :Channel list is full"
-
-*/public final static String ERR_NOPRIVILEGES = "481"; /*
-	  ":Permission Denied- You're not an IRC operator"
+*/public final static String ERR_KEYSET = "467"; /* "<channel> :Channel key already set"
+*/public final static String ERR_CHANNELISFULL = "471"; /* "<channel> :Cannot join channel (+l)"
+*/public final static String ERR_UNKNOWNMODE = "472"; /* "<char> :is unknown mode char to me for <channel>"
+*/public final static String ERR_INVITEONLYCHAN = "473"; /* "<channel> :Cannot join channel (+i)"
+*/public final static String ERR_BANNEDFROMCHAN = "474"; /* "<channel> :Cannot join channel (+b)"
+*/public final static String ERR_BADCHANNELKEY = "475"; /* "<channel> :Cannot join channel (+k)"
+*/public final static String ERR_BADCHANMASK = "476"; /* "<channel> :Bad Channel Mask"
+*/public final static String ERR_NOCHANMODES = "477"; /* "<channel> :Channel doesn't support modes"
+*/public final static String ERR_BANLISTFULL = "478"; /* "<channel> <char> :Channel list is full"
+*/public final static String ERR_NOPRIVILEGES = "481"; /* ":Permission Denied- You're not an IRC operator"
 
  - Any command requiring operator privileges to operate
    MUST return this error to indicate the attempt was
    unsuccessful.
 
-*/public final static String ERR_CHANOPRIVSNEEDED = "482"; /*
-	  "<channel> :You're not channel operator"
+*/public final static String ERR_CHANOPRIVSNEEDED = "482"; /* "<channel> :You're not channel operator"
 
  - Any command requiring 'chanop' privileges (such as
    MODE messages) MUST return this error if the client
    making the attempt is not a chanop on the specified
    channel.
 
-
-
-
-
-
-Kalt                         Informational                     [Page 58]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
-*/public final static String ERR_CANTKILLSERVER = "483"; /*
-	  ":You can't kill a server!"
+*/public final static String ERR_CANTKILLSERVER = "483"; /* ":You can't kill a server!"
 
  - Any attempts to use the KILL command on a server
    are to be refused and this error returned directly
    to the client.
 
-*/public final static String ERR_RESTRICTED = "484"; /*
-	  ":Your connection is restricted!"
+*/public final static String ERR_RESTRICTED = "484"; /* ":Your connection is restricted!"
 
  - Sent by the server to a user upon connection to indicate
    the restricted nature of the connection (user mode "+r").
 
-*/public final static String ERR_UNIQOPPRIVSNEEDED = "485"; /*
-	  ":You're not the original channel operator"
+*/public final static String ERR_UNIQOPPRIVSNEEDED = "485"; /* ":You're not the original channel operator"
 
  - Any MODE requiring "channel creator" privileges MUST
    return this error if the client making the attempt is not
    a chanop on the specified channel.
 
-*/public final static String ERR_NOOPERHOST = "491"; /*
-	  ":No O-lines for your host"
+*/public final static String ERR_NOOPERHOST = "491"; /* ":No O-lines for your host"
 
  - If a client sends an OPER message and the server has
    not been configured to allow connections from the
    client's host as an operator, this error MUST be
    returned.
 
-*/public final static String ERR_UMODEUNKNOWNFLAG = "501"; /*
-	  ":Unknown MODE flag"
+*/public final static String ERR_UMODEUNKNOWNFLAG = "501"; /* ":Unknown MODE flag"
 
  - Returned by the server to indicate that a MODE
    message was sent with a nickname parameter and that
    the a mode flag sent was not recognized.
 
-*/public final static String ERR_USERSDONTMATCH = "502"; /*
-	  ":Cannot change mode for other users"
+*/public final static String ERR_USERSDONTMATCH = "502"; /* ":Cannot change mode for other users"
 
  - Error sent to any user trying to view or change the
    user mode for a user other than themselves.
@@ -687,19 +574,8 @@ These numerics are not described above since they fall into one of
 the following categories:
 
 1. no longer in use;
-
-
-
-
-Kalt                         Informational                     [Page 59]
-
-RFC 2812          Internet Relay Chat: Client Protocol        April 2000
-
-
 2. reserved for future planned use;
-
-3. in current use but are part of a non-generic 'feature' of
-the current IRC server.
+3. in current use but are part of a non-generic 'feature' of the current IRC server.
 
 	231    RPL_SERVICEINFO     232  RPL_ENDOFSERVICES
 	233    RPL_SERVICE
