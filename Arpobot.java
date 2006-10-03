@@ -13,7 +13,7 @@ public class Arpobot
 	final static String kanal = "#ArvoX";
 	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot fra dnttah -- http://word.arvox.dk :)";
 
-	final static String version = "svn $Revision: 51 $ $Date: 2006-10-03 22:19:56 +0200 (ti, 03 okt 2006) $";
+	final static String version = "svn $Revision$ $Date$";
 
 	public static void main(String[] args) throws Throwable
 	{
@@ -26,7 +26,6 @@ public class Arpobot
 		int i;
 		String sendernick;
 
-		HttpClient http = new HttpClient();
 		IrcClient bot =  new IrcClient(server , port);
 		//bot.setServer(server , port);
 		bot.connect();
