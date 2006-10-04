@@ -3,15 +3,15 @@ import irc.command.*;
 
 public class Arpobot
 {
-	final static String server = "dk.quakenet.org";
-	final static int port = 6667;
+	final static String server = "irc.hyggenet.org";
+	final static int port = 6668;
 
 	final static String username = "Arpobot";
 	final static String realname = "Arpobot";
 	final static String nick1 = "Arpobot";
 	final static String nick2 = "Arpobot2";
-	final static String kanal = "#ArvoX";
-	final static String topic = "ArvoX private channel: #ArvoX -- Nu med egen bot fra dnttah -- http://word.arvox.dk :)";
+	final static String kanal = "#Arpobot";
+	final static String topic = "Arpobot udviklingskanal";
 
 	final static String version = "svn $Revision$ $Date$";
 
@@ -26,10 +26,7 @@ public class Arpobot
 		int i;
 		String sendernick;
 
-
-		//HttpClient http = new HttpClient(); skal moskrives
 		IrcClient bot =  new IrcClient(server , port);
-		//bot.setServer(server , port);
 		bot.connect();
 
 		System.out.println(nick1 +"@"+server+":"+port);
@@ -73,7 +70,7 @@ public class Arpobot
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
 				bot.join(kanal);
-				bot.msg("Q@CServe.quakenet.org", "AUTH ArvoXbot QtD6JXt8");
+				bot.msg("NickServ", "IDENTIFY QtD6JXt8");
 			}
 			else if (cmd instanceof MsgCommand)
 			{
