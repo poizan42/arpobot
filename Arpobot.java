@@ -25,7 +25,7 @@ public class Arpobot
 		String skrivning;
 		int i;
 		String sendernick;
-		IrcClient.LogLevel inll = UNK;
+		IrcClient.LogLevel inll;
 		
 		IrcClient bot =  new IrcClient(server, port);
 		bot.connect();
@@ -55,24 +55,24 @@ public class Arpobot
 			if (cmdName.equals("NOTICE") && (((MsgCommand)cmd).receiver.equals("AUTH")) && (((MsgCommand)cmd).message.equals("*** Checking Ident")))
 			{
 				// Set nick and username
-				inll = CONN;
+				inll = IrcClient.LogLevel.CONN;
 				bot.nick(nick1);
 				bot.user(username,realname);
 			}
 			else if (cmdName.equals(IrcNumerics.ERR_NICKNAMEINUSE))
 			{
-				inll = CONN;
+				inll = IrcClient.LogLevel.CONN;
 				bot.nick(nick2);
 				nick = nick2;
 			}
 			else if (cmdName.equals("PING"))
 			{
-				inll = DEBUG;
+				inll = IrcClient.LogLevel.DEBUG;
 				bot.pong(cmd.parameters[0]);
 			}
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
-				inll = CONN;
+				inll = IrcClient.LogLevel.CONN;
 				bot.join(kanal);
 				bot.msg("NickServ", "IDENTIFY QtD6JXt8");
 			}
@@ -80,9 +80,9 @@ public class Arpobot
 			{
 				MsgCommand msgcmd = (MsgCommand)cmd;
 				if (msgcmd.receiver.equals(nick))
-					inll = PRIV;
+					inll = IrcClient.LogLevel.PRIV;
 				else
-					inll = CHAN;
+					inll = IrcClient.LogLevel.CHAN;
 				if ((msgcmd.message.length() > 0) && (msgcmd.message.charAt(0) == '!'))
 				{
 					if (msgcmd.message.toLowerCase().equals("!version"))
@@ -94,7 +94,10 @@ public class Arpobot
 						bot.ctcpReply(msgcmd.sender, "VERSION Arpobot "+version);
 				}
 			}
-			System.out.println("--> ("+inll.toString()+")"+cmd.fullCommand);
+			else
+				 inll = IrcClient.LogLevel.UNK;
+				 
+			System.out.println("--> ("+inll.toString()+") "+cmd.fullCommand);
 		}
 	}
 }
