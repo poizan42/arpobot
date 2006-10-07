@@ -13,7 +13,7 @@ public class IrcClient
 	private BufferedWriter skriv;
 	private BufferedReader laes;
 
-	public enum LogLevel {DEBUG, CONN, USERINF, CTCP, CHAN, PRIV};
+	public enum LogLevel {DEBUG, MOTD, UNK, CONN, USERINF, CTCP, CHAN, PRIV};
 
 	public void pass (String pass) throws Exception
 	{
