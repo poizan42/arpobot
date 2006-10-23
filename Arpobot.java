@@ -26,12 +26,12 @@ public class Arpobot
 		int i;
 		String sendernick;
 		IrcClient.LogLevel inll;
-		
+
 		IrcClient bot =  new IrcClient(server, port);
 		bot.connect();
 
-		System.out.println(nick1 +"@"+server+":"+port);	
-		
+		System.out.println(nick1 +"@"+server+":"+port);
+
 		while (true)
 		{
 			cmd = bot.getCommand();
@@ -73,8 +73,8 @@ public class Arpobot
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
 				inll = IrcClient.LogLevel.CONN;
-				bot.join(kanal);
 				bot.msg("NickServ", "IDENTIFY QtD6JXt8");
+				bot.join(kanal);
 			}
 			else if (cmd instanceof MsgCommand)
 			{
@@ -96,7 +96,7 @@ public class Arpobot
 			}
 			else
 				 inll = IrcClient.LogLevel.UNK;
-				 
+
 			System.out.println("--> ("+inll.toString()+") "+cmd.fullCommand);
 		}
 	}
