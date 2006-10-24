@@ -1,24 +1,53 @@
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
 import irc.*;
 import irc.command.*;
 
 public class Arpobot
 {
-	final static String server = "irc.hyggenet.org";
-	final static int port = 6668;
-
-	final static String username = "Arpobot";
-	final static String realname = "Arpobot";
-	final static String nick1 = "Arpobot";
-	final static String nick2 = "Arpobot2";
-	final static String kanal = "#Arpobot";
-	final static String topic = "Arpobot udviklingskanal";
-
 	final static String version = "svn $Revision$ $Date$";
+	
+	String server;
+	int port;
 
+	String username,realname,channel,nick1,nick2;
+	String onConnectCmd;
+	Document settingsdoc;
+	Element settingselem;
+	NodeList nicks;
+	
 	public static void main(String[] args) throws Throwable
 	{
-
-		String nick = nick1;
+		(new Arpobot()).run("arpobot.conf");
+	}
+	
+	public Arpobot()
+	{
+	}
+	
+	private void loadConfig(String filename) throws Throwable
+	{
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		settingsdoc = builder.parse(filename);
+		settingselem = settingsdoc.getDocumentElement();
+		Element consettings = (Element)settingselem.getElementsByTagName("connection").item(0);
+		NodeList servers = ((Element)consettings.getElementsByTagName("network").item(0)).getElementsByTagName("server");
+		Element serverElem = ((Element)servers.item(0));
+		server = serverElem.getAttributeNode("host").getValue();
+		port = Integer.parseInt(serverElem.getAttributeNode("port").getValue());
+		nicks = consettings.getElementsByTagName("nick");
+		nick1 = nicks.item(0).getTextContent();
+		nick2 = nicks.item(1).getTextContent();
+		username = consettings.getElementsByTagName("username").item(0).getTextContent();
+		realname = consettings.getElementsByTagName("realname").item(0).getTextContent();
+		channel = consettings.getElementsByTagName("channel").item(0).getTextContent();
+		onConnectCmd = consettings.getElementsByTagName("onConnectCmd").item(0).getTextContent();
+	}
+	
+	public void run(String configfilepath) throws Throwable
+	{	
+		String nick = "";
 		String servername = null;
 		int code;
 		IrcCommand cmd;
@@ -27,6 +56,8 @@ public class Arpobot
 		String sendernick;
 		IrcClient.LogLevel inll;
 
+		loadConfig(configfilepath);
+		
 		IrcClient bot =  new IrcClient(server, port);
 		bot.connect();
 
@@ -73,8 +104,8 @@ public class Arpobot
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
 				inll = IrcClient.LogLevel.CONN;
-				bot.msg("NickServ", "IDENTIFY QtD6JXt8");
-				bot.join(kanal);
+				bot.execute(onConnectCmd, IrcClient.LogLevel.CONN);
+				bot.join(channel);
 			}
 			else if (cmd instanceof MsgCommand)
 			{

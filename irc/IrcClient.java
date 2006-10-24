@@ -36,12 +36,12 @@ public class IrcClient
 		commando = "OPER " + user + " " + password + "\r\n";
 		execute(commando, LogLevel.USERINF);
 	}
-	public void QUIT () throws Exception
+	public void quit () throws Exception
 	{
 		commando = "QUIT\r\n";
 		execute(commando, LogLevel.CONN);
 	}
-	public void QUIT (String message) throws Exception
+	public void quit(String message) throws Exception
 	{
 		commando = "QUIT " + message + "\r\n";
 		execute(commando, LogLevel.CONN);
@@ -169,7 +169,7 @@ skal vaere her*/
 	}
 
 /**Non irc command**/
-	private void execute(String commando, LogLevel logLevel) throws Exception
+	public void execute(String commando, LogLevel logLevel) throws Exception
 	{
 		this.skriv.write(commando);
 		this.skriv.flush();
