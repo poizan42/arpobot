@@ -6,7 +6,7 @@ import irc.command.*;
 public class Arpobot
 {
 	final static String version = "svn $Revision$ $Date$";
-	
+
 	String server;
 	int port;
 
@@ -15,16 +15,16 @@ public class Arpobot
 	Document settingsdoc;
 	Element settingselem;
 	NodeList nicks;
-	
+
 	public static void main(String[] args) throws Throwable
 	{
 		(new Arpobot()).run("arpobot.conf");
 	}
-	
+
 	public Arpobot()
 	{
 	}
-	
+
 	private void loadConfig(String filename) throws Throwable
 	{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -44,9 +44,9 @@ public class Arpobot
 		channel = consettings.getElementsByTagName("channel").item(0).getTextContent();
 		onConnectCmd = consettings.getElementsByTagName("onConnectCmd").item(0).getTextContent();
 	}
-	
+
 	public void run(String configfilepath) throws Throwable
-	{	
+	{
 		String nick = "";
 		String servername = null;
 		int code;
@@ -57,7 +57,7 @@ public class Arpobot
 		IrcClient.LogLevel inll;
 
 		loadConfig(configfilepath);
-		
+
 		IrcClient bot =  new IrcClient(server, port);
 		bot.connect();
 
@@ -104,7 +104,7 @@ public class Arpobot
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
 				inll = IrcClient.LogLevel.CONN;
-				bot.execute(onConnectCmd, IrcClient.LogLevel.CONN);
+				bot.execute(onConnectCmd+"\r\n", IrcClient.LogLevel.CONN);
 				bot.join(channel);
 			}
 			else if (cmd instanceof MsgCommand)
