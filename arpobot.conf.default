@@ -9,8 +9,8 @@
 		<username>arpobot</username>
 		<realname>arpobot</realname>
 		<channel>#example</channel>
-		<!-- <onConnectCmd>PRIVMSG NickServ IDENTIFY password</onConnectCmd>
-		     <onConnectCmd>PRIVMSG Q@CServe.QuakeNet.org AUTH name password</onConnectCmd>
+		<!-- <onConnectCmd>PRIVMSG NickServ :IDENTIFY password</onConnectCmd>
+		     <onConnectCmd>PRIVMSG Q@CServe.QuakeNet.org :AUTH name password</onConnectCmd>
 		-->
 	</connection>
 </ArpobotConf>
