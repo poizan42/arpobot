@@ -17,81 +17,81 @@ public class IrcClient
 
 	public void pass (String pass) throws Exception
 	{
-		commando = "PASS " + pass + "\r\n";
+		commando = "PASS " + pass;
 		execute(commando, LogLevel.USERINF);
 	}
 	public void nick (String nickname) throws Exception
 	{
-		commando = "NICK " + nickname + "\r\n";
+		commando = "NICK " + nickname;
 		execute(commando, LogLevel.USERINF);
 	}
 	public void user (String username, String realname) throws Exception
 	{
 		String mode = "8";
-		commando = "USER " + username + " " + mode + " * " + " : " + realname + "\r\n";
+		commando = "USER " + username + " " + mode + " * " + " : " + realname;
 		execute(commando, LogLevel.USERINF);
 	}
 	public void oper (String user,String password) throws Exception
 	{
-		commando = "OPER " + user + " " + password + "\r\n";
+		commando = "OPER " + user + " " + password;
 		execute(commando, LogLevel.USERINF);
 	}
 	public void quit () throws Exception
 	{
-		commando = "QUIT\r\n";
+		commando = "QUIT";
 		execute(commando, LogLevel.CONN);
 	}
 	public void quit(String message) throws Exception
 	{
-		commando = "QUIT " + message + "\r\n";
+		commando = "QUIT " + message;
 		execute(commando, LogLevel.CONN);
 	}
 	public void join (String channel, String key) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "JOIN " + channel + " " + key + "\r\n";
+		commando = "JOIN " + channel + " " + key;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void join (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "JOIN " + channel + "\r\n";
+		commando = "JOIN " + channel;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void part (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "PART " + channel + "\r\n";
+		commando = "PART " + channel;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void mode (String channel, String mode) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "MODE " + channel + " " + mode + "\r\n";
+		commando = "MODE " + channel + " " + mode;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void mode (String channel, String mode, int limet) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "MODE " + channel + " " + mode + " " + limet + "\r\n";
+		commando = "MODE " + channel + " " + mode + " " + limet;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void mode (String channel, String mode, String userOrMaskOrPass) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "MODE " + channel + " " + mode + " " + userOrMaskOrPass + "\r\n";
+		commando = "MODE " + channel + " " + mode + " " + userOrMaskOrPass;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void topic (String channel) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "TOPIC "+channel+"\r\n";
+		commando = "TOPIC " + channel;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void topic (String channel,String topic) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "TOPIC "+channel+" :"+topic+"\r\n";
+		commando = "TOPIC " + channel + " :" + topic;
 		execute(commando, LogLevel.CHAN);
 	}
 //names skal vaere her
@@ -99,19 +99,19 @@ public class IrcClient
 	public void invite (String nick, String channel) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "INVITE " + nick + " " + channel + "\r\n";
+		commando = "INVITE " + nick + " " + channel;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void kick (String user, String channel) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "KICK " + channel + " " + user + "\r\n";
+		commando = "KICK " + channel + " " + user;
 		execute(commando, LogLevel.CHAN);
 	}
 	public void kick (String user, String channel, String comment) throws Exception
 	{
 		channel = checkChannel(channel);
-		commando = "KICK " + channel + " " + user + " :" + comment + "\r\n";
+		commando = "KICK " + channel + " " + user + " :" + comment;
 		execute(commando, LogLevel.CHAN);
 	}
 /*version
@@ -127,7 +127,7 @@ skal vaere her*/
 	}
 	private void msg (String receiver, String text, LogLevel logLevel) throws Exception
 	{
-		commando = "PRIVMSG " + receiver + " :" + text + "\r\n";
+		commando = "PRIVMSG " + receiver + " :" + text;
 		execute(commando, logLevel);
 	}
 	public void notice (String receiver, String text) throws Exception
@@ -136,7 +136,7 @@ skal vaere her*/
 	}
 	private void notice (String receiver, String text, LogLevel logLevel) throws Exception
 	{
-		commando = "NOTICE " + receiver + " :" + text + "\r\n";
+		commando = "NOTICE " + receiver + " :" + text;
 		execute(commando, logLevel);
 	}
 /*who
@@ -147,7 +147,7 @@ skal vaere her*/
 skal vaere her*/
 	public void pong (String daemon) throws Exception
 	{
-		commando = "PONG :" + daemon + "\r\n";
+		commando = "PONG :" + daemon;
 		execute(commando, LogLevel.DEBUG);
 	}
 /*away
@@ -171,10 +171,10 @@ skal vaere her*/
 /**Non irc command**/
 	public void execute(String commando, LogLevel logLevel) throws Exception
 	{
-		this.skriv.write(commando);
+		this.skriv.write(commando + "\r\n");
 		this.skriv.flush();
 
-		System.out.print("<-- ("+logLevel.toString()+") "+commando);
+		System.out.println("<-- ("+logLevel.toString()+") "+commando);
 	}
 	public void connect() throws Exception
 	{

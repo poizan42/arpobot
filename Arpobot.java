@@ -104,7 +104,7 @@ public class Arpobot
 			else if (cmdName.equals(IrcNumerics.RPL_WELCOME))
 			{
 				inll = IrcClient.LogLevel.CONN;
-				bot.execute(onConnectCmd+"\r\n", IrcClient.LogLevel.CONN);
+				bot.execute(onConnectCmd, IrcClient.LogLevel.CONN);
 				bot.join(channel);
 			}
 			else if (cmd instanceof MsgCommand)
@@ -112,6 +112,8 @@ public class Arpobot
 				MsgCommand msgcmd = (MsgCommand)cmd;
 				if (msgcmd.receiver.equals(nick))
 					inll = IrcClient.LogLevel.PRIV;
+				else if (cmdName.equals("NOTICE") && (((MsgCommand)cmd).receiver.equals("AUTH")))
+					inll = IrcClient.LogLevel.CONN;
 				else
 					inll = IrcClient.LogLevel.CHAN;
 				if ((msgcmd.message.length() > 0) && (msgcmd.message.charAt(0) == '!'))
